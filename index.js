@@ -58,6 +58,8 @@ app.post('/login', function(req,res, next) {
         if (!user) { return res.redirect('/'); }
         req.logIn(user, function(err) {
           if (err) { return next(err); }
+          ssn = req.session;
+          ssn.email=req.body.username;
           return res.redirect(307, "/home");
         });
       })(req, res, next);
@@ -76,6 +78,8 @@ app.post("/register", function(req, res) {
             res.redirect("/")
         } else {
             passport.authenticate("local")(req, res, function(){
+                ssn = req.session;
+                ssn.email=req.body.username;
                 res.redirect(307, "/home")
             });
         }
@@ -92,6 +96,6 @@ res.render("home", {username:username});
 // LOGOUT
 app.get("/logout",
 function(req,res){
-    Session.Abandon();
+    req.logout();
     res.redirect("/");
 });
