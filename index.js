@@ -17,6 +17,7 @@ app.set("view engine","ejs");
 
 // MONGOOSE
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
 const session = require("express-session");
 
 require("dotenv").config();
@@ -29,6 +30,7 @@ app.use(session({
 // PASSPORT
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const { clear } = require("console");
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz", 
@@ -40,6 +42,7 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
                  
  ///////////////////     IMPORT     ///////////////////                 
 var User = mongoose.model('User');
+var Course = mongoose.model('Course');
 
 ///////////////////     ROUTING     /////////////////// 
 
@@ -89,8 +92,48 @@ app.post("/register", function(req, res) {
 
 // HOME
 app.post("/home", function(req, res) {
-var username = req.body.username;
-res.render("home", {username:username});
+
+getEnrollment(function(enrollment){
+    res.render("home", {classList: enrollment});
+});
+
+});
+
+// MANAGE COURSES
+app.post("/manageCourses",
+function(req,res){
+    var username = ssn.email;
+
+    Course.find(function (err, docs1) {
+        User.findOne(
+            { username: ssn.email },
+            { _id: 0, enrollment: 1}
+            ).lean().exec(function (err, docs2) {
+                res.render("course", {
+                    courseList : docs1,
+                    classList : docs2
+                });
+        });
+    });
+});
+
+// SAVE COURSES
+app.post("/saveCourses",
+async function(req,res){
+    await getCourses(function(callback){
+        var updateEnrollment = [];
+        for (var item of callback){
+            var checkBox = req.body[item.courseName];
+            if(checkBox == 'on')
+            {
+                updateEnrollment.push(item.courseName);
+            }
+        }
+        //console.log(updateEnrollment);
+    enroll(ssn.email, updateEnrollment);
+});
+    
+res.redirect(307, "/home")
 });
 
 // LOGOUT
@@ -99,3 +142,58 @@ function(req,res){
     req.logout();
     res.redirect("/");
 });
+
+///////////////////     FUNCTIONS     /////////////////// 
+
+var getEnrollment = function (callback) {
+    User.findOne(
+        { username: ssn.email },
+        { _id: 0, enrollment: 1}
+     ).lean().exec(function (err, docs) {
+        if(err){
+            console.log(err);
+            return callback(docs);
+        }
+        //console.log(docs); // returns json
+        return callback(docs);
+    });
+};
+
+var getCourses = function (callback) {
+    Course.find({},{ _id: 0, courseName: 1}).lean().exec(function (err, docs) {
+        if(err){
+            console.log(err);
+            return callback(docs);
+        }
+        //console.log(docs); // returns json
+        return callback(docs);
+    });
+};
+
+async function enroll(usernameTest, enrollTest){
+    await clearEnrollment(ssn.email);
+    await User.findOneAndUpdate(
+        { username: usernameTest }, 
+        { $addToSet: { enrollment: enrollTest  } },
+       function (error, success) {
+             if (error) {
+                 //console.log(error);
+             } else {
+                 //console.log(success);
+             }
+         });
+}
+function clearEnrollment(usernameTest){
+    User.findOneAndUpdate(
+        { username: usernameTest }, 
+        { $set: { enrollment: []  } },
+       function (error, success) {
+             if (error) {
+                 //console.log(error);
+             } else {
+                 //console.log(success);
+             }
+         });
+}
+
+

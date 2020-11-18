@@ -33,11 +33,22 @@ p {
 
 .btn-default {
     border: 1px solid lightgrey;
+    background-color: white;
     min-width: 100px;
     margin-left: 10px;
     margin-right: 10px;
 
 }
+.btn[disabled]:hover {
+    background-color:white;
+}
+.btn[enabled]:hover{
+    color: #fff;
+    background-color: #52d6f4;
+    opacity: 1;
+    border-color: white;
+}
+
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active,
@@ -45,7 +56,7 @@ p {
 .open > .dropdown-toggle.btn-default {
     color: #fff;
     background-color: #52d6f4;
-    opacity: 0.8;
+    opacity: 1;
     border-color: white;
 }
 
@@ -63,7 +74,7 @@ p {
 .open > .dropdown-toggle.btn-primary {
     color: #fff;
     background-color: #52d6f4;
-    opacity: 0.8;
+    opacity: 1;
     border-color: white;
 }
 
@@ -75,6 +86,11 @@ p {
 .center_div {
     margin: 0 auto;
     width: 300px;
+}
+
+.checkbox{
+    width: 25px;
+    height: 25px;
 }
 
 .dark-background{
@@ -108,12 +124,23 @@ p {
     background-color: white;
     opacity: 1;
 }
+.form{
+    color: white;
+    font-size: 40px;
+    margin-top: 100px;
+}
+
 
 .input-group-text,
 .card-header {
     background-color: white;
     border: 1px solid white;
 }
+
+input[type="checkbox"] {
+    background: #3d404e;
+    border: #7f83a2 1px solid;
+ }
 
 .flex-equal > * {
     -ms-flex: 1;
@@ -143,6 +170,7 @@ p {
 .right-margin{
     margin-right: 60px;
 }
+.top-margin{
+    margin-top: 50px;
+}
 
-
-  
