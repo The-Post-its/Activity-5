@@ -109,7 +109,7 @@ function(req,res){
             { username: ssn.email },
             { _id: 0, enrollment: 1}
             ).lean().exec(function (err, docs2) {
-                res.render("course", {
+                res.render("courseSelection", {
                     courseList : docs1,
                     classList : docs2
                 });
