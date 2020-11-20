@@ -93,6 +93,10 @@ p {
     height: 25px;
 }
 
+.col-sm{
+    align-self: center;
+}
+
 .dark-background{
     background-color: #363538;  
 }
@@ -174,3 +178,7 @@ input[type="checkbox"] {
     margin-top: 50px;
 }
 
+
+
+
+/* TESTING */
