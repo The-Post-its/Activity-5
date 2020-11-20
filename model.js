@@ -62,8 +62,3 @@ function getEnrollment(callback) {
     });
   };
 
-
-///////////////////     EXPORTS    /////////////////// 
-
-module.exports = mongoose.model('User', userSchema);
-module.exports = mongoose.model('Course', courseSchema);

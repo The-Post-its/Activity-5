@@ -87,7 +87,11 @@
                     <h2 class="display-5">My Courses</h2>
 
 
-
+                <% if(classList.enrollment.length ==0){%>
+                    <br><br>
+                    <h5>Ready to collaborate?</h5>
+                    <h5>Add courses using the <em>'Manage Courses'</em> button!</h5>
+                <%}%>
 
                 <% for (var item of classList.enrollment) { %>
                     <div class = "list-group-item">
