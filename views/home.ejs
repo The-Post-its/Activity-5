@@ -90,8 +90,12 @@
                     <div class = "list-group-item">
                         <span>
                             <span class = "lead right-margin"><%=item%></span>
-                            <button type="button" class="btn btn-default">QUIZ</button>
-                            <button type="button" class="btn btn-default">VIEW</button>
+                            <form method = "post" action = "">
+                                <button type="submit" class="btn btn-default">QUIZ</button>
+                            </form>
+                            <form method = "post" action = "/courseMaterial">
+                            <button type="submit" class="btn btn-default">VIEW</button>
+                            </form>
                         </span>
                     </div>
                     <% } %>

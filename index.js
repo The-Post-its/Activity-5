@@ -136,6 +136,14 @@ async function(req,res){
 res.redirect(307, "/home")
 });
 
+
+// COURSE MATERIAL  
+app.post("/courseMaterial",
+function(req,res){
+    res.render("courseMaterial");
+});
+
+
 // LOGOUT
 app.get("/logout",
 function(req,res){
