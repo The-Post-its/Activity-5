@@ -75,46 +75,44 @@
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <h2 class="mb-0">
-                                  <button class="btn btn-block btn-outline-secondary text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  <button class="btn btn-block btn-default text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                    Add Question
                                   </button>
                                 </h2>
                           
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
-                                        <form class="form-signin" action="" method="POST"><!--Add the appropriate action here for submit question-->
-                                                <!--input type="hidden" required name = "owner" value ="" This will be needed to identify owner of the question-->    
-                                                <input type="text" required name="question" class="form-control" placeholder="Question?"><br/>
-                                                <input type="text" required name="answer1" class="form-control" placeholder="Correct Answer"><br/>
-                                                <input type="text" required name="answer2" class="form-control" placeholder="Incorrect Answer 1"><br/>
-                                                <input type="text" required name="answer3" class="form-control" placeholder="Incorrect Answer 2"><br/>
-                                                <input type="text" required name="answer4" class="form-control" placeholder="Incorrect Answer 3"><br/>
-                                                <button class="btn btn-outline-secondary" type="submit">Submit Question</button>
+                                        <form class="form-signin" action="/addQuestion" method="POST"> 
+                                                <input type="hidden" id="courseName" name="courseName" value="<%=courseName%>">
+                                                <input type="text" name="question" class="form-control" placeholder="Question"><br/>
+                                                <input type="text" name="correctAnswer" class="form-control" placeholder="Correct Answer"><br/>
+                                                <input type="text" name="answer" class="form-control" placeholder="Incorrect Answer 1"><br/>
+                                                <input type="text" name="answer" class="form-control" placeholder="Incorrect Answer 2"><br/>
+                                                <input type="text" name="answer" class="form-control" placeholder="Incorrect Answer 3"><br/>
+                                                <button class="btn btn-default" type="submit">Submit Question</button>
                                         </form>
                                     </div>
                                 </div>
                             </div> 
                         </div>
                     </div>
-
+                    <%for (var item of userCourseQuestions) { %>
                     <div class = "list-group-item">
                         <ul class="list-group">
-                            <a href="#!" class="list-group-item list-group-item-action list-group-item-dark">Question</a>
-                            <li class="list-group-item">Answer</li>
-                            <li class="list-group-item disabled">Wrong Answer 1</li>
-                            <li class="list-group-item disabled">Wrong Answer 2</li>
-                            <li class="list-group-item disabled">Wrong Answer 3</li>
+                            <p class="list-group-item list-group-item-dark"><%=item.question%></p>
+                            <%  for (var i=0; i<item.answers.length; i++) {%>
+                                <% if(item.answers[i].correct == true){%>
+                                    <li class="list-group-item"><%=item.answers[i].answer%>
+                                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="#52d6f4" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                                          </svg>
+                                        </li>
+                                    <%}else{%>
+                                <li class="list-group-item disabled"><%=item.answers[i].answer%></li>
+                            <%}}%>
                         </ul>
                     </div>
-                    <div class = "list-group-item">
-                        <ul class="list-group">
-                            <a href="#!" class="list-group-item list-group-item-action list-group-item-dark">Who am I?</a>
-                            <li class="list-group-item">Me</li>
-                            <li class="list-group-item disabled">You</li>
-                            <li class="list-group-item disabled">her</li>
-                            <li class="list-group-item disabled">him</li>
-                        </ul>
-                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>

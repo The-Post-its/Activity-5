@@ -142,18 +142,47 @@ res.redirect(307, "/home")
 app.post("/courseMaterial",
 function(req,res){
     var courseName = req.body.courseName;
-    res.render("courseMaterial",{
-        courseName: courseName
-    });
-    // Question.find(
-    //     { username: ssn.email, courseName:courseName },
-    //     {}
-    //     ).lean().exec(function (err, userCourseQuestions) {
-    //         res.render("courseMaterial",{
-    //             courseName: courseName,
-    //             userCourseQuestions: userCourseQuestions
-    //         });
-    // });
+
+    getUserCourseQuestions(courseName, function(err, docs) {
+        if (err) {
+          console.log(err);
+        }
+      
+        //console.log(docs)
+        res.render("courseMaterial",{
+            courseName: courseName,
+            userCourseQuestions: docs
+        });
+      });
+
+});
+
+// ADD QUESTION 
+app.post("/addQuestion",
+async function(req,res){
+    var courseName = req.body.courseName;
+    var ownerName = ssn.email;
+    var question = req.body.question;
+    var correctAnswer = req.body.correctAnswer;
+    var answerArray = req.body.answer;
+
+       var answers = [];
+       // push correct answer
+       answers.push({answer: correctAnswer, correct: 1});
+       // push incorrect answers
+       answerArray.forEach(item => {
+        if(item != ''){
+       answers.push({
+           answer: item,
+           correct: 0
+       });
+            }
+        }
+        );
+ // add question to database
+    await addQuestion(courseName, ownerName, question, answers);
+// reload the page
+    res.redirect(307, "/courseMaterial")
 
 });
 
@@ -249,16 +278,50 @@ var getUserQuestions = function (callback) {
     });
 };
 
-var getUserCourseQuestions = function (callback) {
-    Question.find(
-        { ownerName: ssn.email },
-        {}
-     ).lean().exec(function (err, docs) {
-        if(err){
-            console.log(err);
-            return callback(docs);
-        }
-        //console.log(docs); // returns json
-        return callback(docs);
+// var getUserCourseQuestions = function (callback) {
+//     Question.find(
+//         { ownerName: ssn.email },
+//         {}
+//      ).lean().exec(function (err, docs) {
+//         if(err){
+//             console.log(err);
+//             return callback(docs);
+//         }
+//         //console.log(docs); // returns json
+//         return callback(docs);
+//     });
+// };
+
+function getUserCourseQuestions(courseName, callback) {
+    Question.find({ownerName: ssn.email, courseName: courseName}, function(err, docs) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, docs);
+      }
     });
-};
+  };
+
+
+function addQuestion(courseName, ownerName, question, answers){
+    const userQuestion = new Question ({
+        courseName: courseName,
+        ownerName: ownerName,
+        question: question,
+        answers: answers
+    });
+    userQuestion.save();
+}
+// async function addQuestions(){
+// // var courseName = "ENEL 384";
+// // var ownerName = "Roxanne";
+// // var question = "What is my name?";
+// // var answers = [{answer: "Sara", correct: 0}, {answer: "Martha", correct: 0}, {answer: "Roxanne", correct: 1}]
+// // await addQuestion(courseName, ownerName, question, answers);
+// var courseName = "ENEL 384";
+// var ownerName = "Roxanne";
+// var question = "What class is this for?";
+// var answers = [{answer: "ENEL 384", correct: 1}, {answer: "ENSE 352", correct: 0}, {answer: "ENSE 374", correct: 0}]
+// await addQuestion(courseName, ownerName, question, answers);
+
+// }

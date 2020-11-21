@@ -113,26 +113,43 @@ await addQuestion(courseName, ownerName, question, answers);
 //UNCOMMENT TO RUN ADD QUESTIONS DB
 //addQuestions();
 
-var getUserQuestions = function (callback) {
-    Question.find(
-        { ownerName: "Roxanne" },
-        {}
-     ).lean().exec(function (err, docs) {
-        if(err){
-            console.log(err);
-            return callback(JSON.stringify(docs));
-        }
-        //console.log(docs); // returns json
-        return callback(JSON.stringify(docs));
+// var getUserQuestions = function (callback) {
+//     Question.find(
+//         { ownerName: "Roxanne" },
+//         {}
+//      ).lean().exec(function (err, docs) {
+//         if(err){
+//             console.log(err);
+//             return callback(JSON.stringify(docs));
+//         }
+//         //console.log(docs); // returns json
+//         return callback(JSON.stringify(docs));
+//     });
+// };
+
+// getUserQuestions(function(userQuestions){
+//    console.log(userQuestions);
+//     var jsonUserQuestions = JSON.stringify(userQuestions);
+
+//    // console.log(jsonUserQuestions);
+//     //console.log(JSON.stringify(userQuestions));
+// });
+
+function getUserCourseQuestions(courseName, callback) {
+    Question.find({ownerName: "Roxanne", courseName: courseName}, function(err, docs) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, docs);
+      }
     });
-};
+  };
 
-getUserQuestions(function(userQuestions){
-   console.log(userQuestions);
-    var jsonUserQuestions = JSON.stringify(userQuestions);
+  getUserCourseQuestions("ENEL 384", function(err, docs) {
+    if (err) {
+      console.log(err);
+    }
+  
+    console.log(docs)
+  });
 
-   // console.log(jsonUserQuestions);
-    //console.log(JSON.stringify(userQuestions));
-});
-
- 
