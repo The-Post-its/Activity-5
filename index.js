@@ -43,6 +43,7 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
  ///////////////////     IMPORT     ///////////////////                 
 var User = mongoose.model('User');
 var Course = mongoose.model('Course');
+var Question = mongoose.model('Question');
 
 ///////////////////     ROUTING     /////////////////// 
 
@@ -140,9 +141,38 @@ res.redirect(307, "/home")
 // COURSE MATERIAL  
 app.post("/courseMaterial",
 function(req,res){
-    res.render("courseMaterial");
+    var courseName = req.body.courseName;
+    res.render("courseMaterial",{
+        courseName: courseName
+    });
+    // Question.find(
+    //     { username: ssn.email, courseName:courseName },
+    //     {}
+    //     ).lean().exec(function (err, userCourseQuestions) {
+    //         res.render("courseMaterial",{
+    //             courseName: courseName,
+    //             userCourseQuestions: userCourseQuestions
+    //         });
+    // });
+
 });
 
+// QUIZ
+app.post("/quiz",
+function(req,res){
+    getUserQuestions(function(userQuestions){
+       // console.log(userQuestions);
+        // var jsonUserQuestions = JSON.stringify(userQuestions);
+    
+        // console.log(jsonUserQuestions);
+        //console.log(JSON.stringify(userQuestions));
+        res.render("quiz", {
+           userQuestions : userQuestions
+        });
+
+    });
+    
+});
 
 // LOGOUT
 app.get("/logout",
@@ -205,3 +235,30 @@ function clearEnrollment(usernameTest){
 }
 
 
+var getUserQuestions = function (callback) {
+    Question.find(
+        { ownerName: ssn.email },
+        {}
+     ).lean().exec(function (err, docs) {
+        if(err){
+            console.log(err);
+            return callback(docs);
+        }
+        //console.log(docs); // returns json
+        return callback(docs);
+    });
+};
+
+var getUserCourseQuestions = function (callback) {
+    Question.find(
+        { ownerName: ssn.email },
+        {}
+     ).lean().exec(function (err, docs) {
+        if(err){
+            console.log(err);
+            return callback(docs);
+        }
+        //console.log(docs); // returns json
+        return callback(docs);
+    });
+};

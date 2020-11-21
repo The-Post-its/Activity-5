@@ -47,18 +47,16 @@ const courseSchema = module.exports = new mongoose.Schema ({
 const Course = module.exports = new mongoose.model("Course", courseSchema)
 
 
-function getEnrollment(callback) {
-    console.log("GET ENROLLMENT MODEL FUNCTION")
-    User.findOne(
-        { username: username },
-        { _id: 0, enrollment: 1}
-     ).lean().exec(function (err, docs) {
-        if(err){
-            //console.log(err);
-        }
-        //console.log(docs); // returns json
-        callback(docs);
-        res.render("home", {username:username, classList: docs});
-    });
-  };
 
+///////////////////     Q A MODEL      /////////////////// 
+const questionSchema = module.exports = new mongoose.Schema ({
+    courseName: String,
+    ownerName: String,
+    question: String,
+    answers: [{
+        answer: String,
+        correct: Boolean
+    }]
+})
+
+const Question = module.exports = new mongoose.model("Question", questionSchema)

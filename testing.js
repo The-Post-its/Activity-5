@@ -22,6 +22,7 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
 ///////////////////     IMPORT     /////////////////// 
 var User = mongoose.model('User');                
 var Course = mongoose.model('Course');
+var Question = mongoose.model('Question');
 
 ///////////////////     TESTING     /////////////////// 
 
@@ -84,3 +85,54 @@ function clearEnrollment(usernameTest){
 // clearEnrollment(usernameTest);
 // var enrollTest = ["ENSE 352", "ENSE 374"];
 // enroll(usernameTest, enrollTest);
+
+
+// ADD QA TEST
+function addQuestion(courseName, ownerName, question, answers){
+    const userQuestion = new Question ({
+        courseName: courseName,
+        ownerName: ownerName,
+        question: question,
+        answers: answers
+    });
+    userQuestion.save();
+}
+async function addQuestions(){
+// var courseName = "ENEL 384";
+// var ownerName = "Roxanne";
+// var question = "What is my name?";
+// var answers = [{answer: "Sara", correct: 0}, {answer: "Martha", correct: 0}, {answer: "Roxanne", correct: 1}]
+// await addQuestion(courseName, ownerName, question, answers);
+var courseName = "ENEL 384";
+var ownerName = "Roxanne";
+var question = "What class is this for?";
+var answers = [{answer: "ENEL 384", correct: 1}, {answer: "ENSE 352", correct: 0}, {answer: "ENSE 374", correct: 0}]
+await addQuestion(courseName, ownerName, question, answers);
+
+}
+//UNCOMMENT TO RUN ADD QUESTIONS DB
+//addQuestions();
+
+var getUserQuestions = function (callback) {
+    Question.find(
+        { ownerName: "Roxanne" },
+        {}
+     ).lean().exec(function (err, docs) {
+        if(err){
+            console.log(err);
+            return callback(JSON.stringify(docs));
+        }
+        //console.log(docs); // returns json
+        return callback(JSON.stringify(docs));
+    });
+};
+
+getUserQuestions(function(userQuestions){
+   console.log(userQuestions);
+    var jsonUserQuestions = JSON.stringify(userQuestions);
+
+   // console.log(jsonUserQuestions);
+    //console.log(JSON.stringify(userQuestions));
+});
+
+ 
