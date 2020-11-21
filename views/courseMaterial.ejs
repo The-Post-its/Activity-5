@@ -96,10 +96,11 @@
                             </div> 
                         </div>
                     </div>
-                    <%for (var item of userCourseQuestions) { %>
+                    <%for (var item of courseQuestions) { %>
+                        <% if(item.ownerName == ssn.email){%>
                     <div class = "list-group-item">
                         <ul class="list-group">
-                            <p class="list-group-item list-group-item-dark"><%=item.question%></p>
+                            <li class="list-group-item list-group-item-dark"><%=item.question%></li>
                             <%  for (var i=0; i<item.answers.length; i++) {%>
                                 <% if(item.answers[i].correct == true){%>
                                     <li class="list-group-item"><%=item.answers[i].answer%>
@@ -112,7 +113,7 @@
                             <%}}%>
                         </ul>
                     </div>
-                    <%}%>
+                    <%}}%>
                 </div>
             </div>
         </div>
@@ -123,30 +124,30 @@
                 <div class="list-group"> 
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                        <button class="btn btn-block btn-outline-secondary text-left" type="button">
-                        Take Quiz
+                        <button class="btn btn-block btn-default text-center" type="button">
+                        Take A Quiz
                         </button>
                         </h2>
                     </div>
                 
+                    <%for (var item of courseQuestions) { %>
+                        <% if(item.ownerName != ssn.email){%>
                     <div class = "list-group-item">
                         <ul class="list-group">
-                            <a href="#!" class="list-group-item list-group-item-action list-group-item-dark">Question</a>
-                            <li class="list-group-item">Answer</li>
-                            <li class="list-group-item disabled">Wrong Answer 1</li>
-                            <li class="list-group-item disabled">Wrong Answer 2</li>
-                            <li class="list-group-item disabled">Wrong Answer 3</li>
+                            <li class="list-group-item list-group-item-dark"><%=item.question%></li>
+                            <%  for (var i=0; i<item.answers.length; i++) {%>
+                                <% if(item.answers[i].correct == true){%>
+                                    <li class="list-group-item"><%=item.answers[i].answer%>
+                                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="#52d6f4" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                                          </svg>
+                                        </li>
+                                    <%}else{%>
+                                <li class="list-group-item disabled"><%=item.answers[i].answer%></li>
+                            <%}}%>
                         </ul>
                     </div>
-                    <div class = "list-group-item">
-                        <ul class="list-group">
-                            <a href="#!" class="list-group-item list-group-item-action list-group-item-dark">Question</a>
-                            <li class="list-group-item">Answer</li>
-                            <li class="list-group-item disabled">Wrong Answer 1</li>
-                            <li class="list-group-item disabled">Wrong Answer 2</li>
-                            <li class="list-group-item disabled">Wrong Answer 3</li>
-                        </ul>
-                    </div>
+                    <%}}%>
                 </div>
             </div>
         </div>

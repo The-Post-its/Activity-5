@@ -19,7 +19,6 @@ app.set("view engine","ejs");
 const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
 const session = require("express-session");
-
 require("dotenv").config();
 app.use(session({
     secret: process.env.SECRET,
@@ -143,7 +142,7 @@ app.post("/courseMaterial",
 function(req,res){
     var courseName = req.body.courseName;
 
-    getUserCourseQuestions(courseName, function(err, docs) {
+      getAllCourseQuestions(courseName, function(err, docs) {
         if (err) {
           console.log(err);
         }
@@ -151,7 +150,7 @@ function(req,res){
         //console.log(docs)
         res.render("courseMaterial",{
             courseName: courseName,
-            userCourseQuestions: docs
+            courseQuestions: docs
         });
       });
 
@@ -292,8 +291,18 @@ var getUserQuestions = function (callback) {
 //     });
 // };
 
-function getUserCourseQuestions(courseName, callback) {
-    Question.find({ownerName: ssn.email, courseName: courseName}, function(err, docs) {
+// function getUserCourseQuestions(courseName, callback) {
+//     Question.find({ownerName: ssn.email, courseName: courseName}, function(err, docs) {
+//       if (err) {
+//         callback(err, null);
+//       } else {
+//         callback(null, docs);
+//       }
+//     });
+//   };
+
+  function getAllCourseQuestions(courseName, callback) {
+    Question.find({courseName: courseName}, function(err, docs) {
       if (err) {
         callback(err, null);
       } else {

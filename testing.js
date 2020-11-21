@@ -135,8 +135,27 @@ await addQuestion(courseName, ownerName, question, answers);
 //     //console.log(JSON.stringify(userQuestions));
 // });
 
-function getUserCourseQuestions(courseName, callback) {
-    Question.find({ownerName: "Roxanne", courseName: courseName}, function(err, docs) {
+// function getUserCourseQuestions(courseName, callback) {
+//     Question.find({ownerName: "Roxanne", courseName: courseName}, function(err, docs) {
+//       if (err) {
+//         callback(err, null);
+//       } else {
+//         callback(null, docs);
+//       }
+//     });
+//   };
+
+//   getUserCourseQuestions("ENEL 384", function(err, docs) {
+//     if (err) {
+//       console.log(err);
+//     }
+  
+//     console.log(docs)
+//   });
+
+
+function getAllCourseQuestions(courseName, callback) {
+    Question.find({courseName: courseName},{_id:1}, function(err, docs) {
       if (err) {
         callback(err, null);
       } else {
@@ -145,11 +164,34 @@ function getUserCourseQuestions(courseName, callback) {
     });
   };
 
-  getUserCourseQuestions("ENEL 384", function(err, docs) {
-    if (err) {
-      console.log(err);
-    }
-  
-    console.log(docs)
-  });
+  function test(){
+    getAllCourseQuestions("ENEL 384", function(err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        //console.log(docs);
 
+        var testIds = [];
+        docs.forEach(item => {
+         if(item != ''){
+        testIds.push({
+            id: item._id
+        });
+             }
+         }
+         );
+         function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+          }
+          
+         console.log(testIds);
+         shuffle(testIds);
+         console.log(testIds);
+         shuffle(testIds);
+         console.log(testIds);
+
+      });
+      
+  }
+
+  test();
