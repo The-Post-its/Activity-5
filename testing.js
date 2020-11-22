@@ -23,8 +23,9 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
 var User = mongoose.model('User');                
 var Course = mongoose.model('Course');
 var Question = mongoose.model('Question');
+var Quiz = mongoose.model('Quiz');
 
-///////////////////     TESTING     /////////////////// 
+///////////////////     INITIALIZATION     /////////////////// 
 
 // ADD COURSES
 function addCourse(courseName){
@@ -113,6 +114,14 @@ await addQuestion(courseName, ownerName, question, answers);
 //UNCOMMENT TO RUN ADD QUESTIONS DB
 //addQuestions();
 
+
+
+
+
+///////////////////     TESTING COMPLETE     ///////////////////
+
+
+
 // var getUserQuestions = function (callback) {
 //     Question.find(
 //         { ownerName: "Roxanne" },
@@ -153,45 +162,126 @@ await addQuestion(courseName, ownerName, question, answers);
 //     console.log(docs)
 //   });
 
+// function getQuizQuestions(quizQuestions, callback) {
+//     Question.find().where('_id').in(quizQuestions).exec((err, docs) => {
+//       if (err) {
+//         callback(err, null);
+//       } else {
+//         callback(null, docs);
+//       }
+//     });
+//   };
 
-function getAllCourseQuestions(courseName, callback) {
-    Question.find({courseName: courseName},{_id:1}, function(err, docs) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, docs);
-      }
-    });
-  };
+// function getAllCourseQuestions(courseName, callback) {
+//     Question.find({courseName: courseName}, function(err, docs) {
+//       if (err) {
+//         callback(err, null);
+//       } else {
+//         callback(null, docs);
+//       }
+//     });
+//   };
 
-  function test(){
-    getAllCourseQuestions("ENEL 384", function(err, docs) {
-        if (err) {
-          console.log(err);
-        }
-        //console.log(docs);
+//   function randomizeQuestions(courseName, questionCount){
+   
+//     getAllCourseQuestions(courseName, function(err, docs) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         //console.log(docs);
 
-        var testIds = [];
-        docs.forEach(item => {
-         if(item != ''){
-        testIds.push({
-            id: item._id
-        });
-             }
-         }
-         );
-         function shuffle(array) {
-            array.sort(() => Math.random() - 0.5);
-          }
+//         // ADD ALL QUESTION IDS TO AN ARRAY
+//         var allQuestionIds = [];
+//         docs.forEach(item => {
+//          if(item != ''){
+//             allQuestionIds.push({
+//             _id: item._id
+//         });
+//              }
+//          }
+//          );
+//          // SHUFFLE FUNCTION
+//          function shuffle(array) {
+//             array.sort(() => Math.random() - 0.5);
+//           }
           
-         console.log(testIds);
-         shuffle(testIds);
-         console.log(testIds);
-         shuffle(testIds);
-         console.log(testIds);
+//         // SHUFFLE IDS
+//          shuffle(allQuestionIds);
+//          //console.log(allQuestionIds);
+        
+//          // ADD NUMBER OF QUESTIONS TO OUTPUT
+//          var quizQuestions = [];
+//          for(var i = 0; i< questionCount; i++){
+//              quizQuestions.push(allQuestionIds[i]._id)
+//          }
+//          //console.log(quizQuestions);
+//          // GET THE QUESTIONS TO ADD TO QUIZ
+//          getQuizQuestions(quizQuestions, function(err, docs) {
+//             var questions = [];
+//             docs.forEach(item => {
+//              if(item != ''){
+//             questions.push({
+//                 question: item,
+//                 answerSelected: ""
+//             });
+//                  }
+//              }
+//              );
+//              generateQuiz(courseName, "Roxanne", questions, function(err, docs) {
+//                     console.log(docs);
+//             });
+        
+//       });
+//     });
+   
+//   }
 
-      });
-      
-  }
+//   // TEST FUNCTION FOR RANDOMIZATION
+//   var courseName = "ENEL 384";
+//   var questionCount = 2;
+//  // UNCOMMENT AND RUN TO ADD QUIZ QUESTIONS
+//   randomizeQuestions(courseName, questionCount);
 
-  test();
+
+
+//   // ADD QA TEST
+// function generateQuiz(courseName, ownerName, questions, callback){
+//     const quiz = new Quiz ({
+//         courseName: courseName,
+//         ownerName: ownerName,
+//         timeTaken: 0,
+//         grade: 0.0,
+//         questions: questions
+//     });
+//     quiz.save(function(err,docs){
+//         //console.log(docs);
+//         callback(null,docs);
+//     });
+// }
+
+// async function generateQuizzes(){
+//     var courseName = "ENEL 384";
+//     var ownerName = "Roxanne";
+//     getAllCourseQuestions(courseName, function(err, docs) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         //console.log(docs);
+
+//         var questions = [];
+//         docs.forEach(item => {
+//          if(item != ''){
+//         questions.push({
+//             question: item,
+//             answerSelected: ""
+//         });
+//              }
+//          }
+//          );
+//          generateQuiz(courseName, ownerName, questions);
+//       });
+//     }
+
+
+//generateQuizzes();
+

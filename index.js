@@ -43,6 +43,7 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
 var User = mongoose.model('User');
 var Course = mongoose.model('Course');
 var Question = mongoose.model('Question');
+var Quiz = mongoose.model('Quiz');
 
 ///////////////////     ROUTING     /////////////////// 
 
@@ -188,18 +189,69 @@ async function(req,res){
 // QUIZ
 app.post("/quiz",
 function(req,res){
-    getUserQuestions(function(userQuestions){
-       // console.log(userQuestions);
-        // var jsonUserQuestions = JSON.stringify(userQuestions);
-    
-        // console.log(jsonUserQuestions);
-        //console.log(JSON.stringify(userQuestions));
-        res.render("quiz", {
-           userQuestions : userQuestions
-        });
 
+  var courseName = req.body.courseName;
+  var questionCount = 2;
+  randomizeQuestions(courseName, questionCount);
+
+// GENERATE A QUIZ
+  function randomizeQuestions(courseName, questionCount){
+   
+    getAllCourseQuestions(courseName, function(err, docs) {
+        if (err) {
+          console.log(err);
+        }
+
+        // ADD ALL QUESTION IDS TO AN ARRAY
+        var allQuestionIds = [];
+        docs.forEach(item => {
+         if(item != ''){
+            allQuestionIds.push({
+            _id: item._id
+        });
+             }
+         }
+         );
+         // SHUFFLE FUNCTION
+         function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+          }
+          
+        // SHUFFLE IDS
+         shuffle(allQuestionIds);
+
+         // ADD NUMBER OF QUESTIONS TO OUTPUT
+         var quizQuestions = [];
+         for(var i = 0; i< questionCount; i++){
+             quizQuestions.push(allQuestionIds[i]._id)
+         }
+
+         // GET THE QUESTIONS TO ADD TO QUIZ
+         getQuizQuestions(quizQuestions, function(err, docs) {
+            var questions = [];
+            docs.forEach(item => {
+             if(item != ''){
+            questions.push({
+                question: item,
+                answerSelected: ""
+            });
+                 }
+             }
+             );
+             // CREATE AND SAVE THE QUIZ
+             // REDIRECT TO QUIZ PAGE
+             generateQuiz(courseName, ssn.email, questions, function(err, docs) {
+                    console.log(docs);
+                    res.render("quiz", {
+                        quizContent : docs
+                     });
+            });
+        
+      });
     });
-    
+   
+  }
+
 });
 
 // LOGOUT
@@ -208,6 +260,8 @@ function(req,res){
     req.logout();
     res.redirect("/");
 });
+
+
 
 ///////////////////     FUNCTIONS     /////////////////// 
 
@@ -262,45 +316,6 @@ function clearEnrollment(usernameTest){
          });
 }
 
-
-var getUserQuestions = function (callback) {
-    Question.find(
-        { ownerName: ssn.email },
-        {}
-     ).lean().exec(function (err, docs) {
-        if(err){
-            console.log(err);
-            return callback(docs);
-        }
-        //console.log(docs); // returns json
-        return callback(docs);
-    });
-};
-
-// var getUserCourseQuestions = function (callback) {
-//     Question.find(
-//         { ownerName: ssn.email },
-//         {}
-//      ).lean().exec(function (err, docs) {
-//         if(err){
-//             console.log(err);
-//             return callback(docs);
-//         }
-//         //console.log(docs); // returns json
-//         return callback(docs);
-//     });
-// };
-
-// function getUserCourseQuestions(courseName, callback) {
-//     Question.find({ownerName: ssn.email, courseName: courseName}, function(err, docs) {
-//       if (err) {
-//         callback(err, null);
-//       } else {
-//         callback(null, docs);
-//       }
-//     });
-//   };
-
   function getAllCourseQuestions(courseName, callback) {
     Question.find({courseName: courseName}, function(err, docs) {
       if (err) {
@@ -321,16 +336,27 @@ function addQuestion(courseName, ownerName, question, answers){
     });
     userQuestion.save();
 }
-// async function addQuestions(){
-// // var courseName = "ENEL 384";
-// // var ownerName = "Roxanne";
-// // var question = "What is my name?";
-// // var answers = [{answer: "Sara", correct: 0}, {answer: "Martha", correct: 0}, {answer: "Roxanne", correct: 1}]
-// // await addQuestion(courseName, ownerName, question, answers);
-// var courseName = "ENEL 384";
-// var ownerName = "Roxanne";
-// var question = "What class is this for?";
-// var answers = [{answer: "ENEL 384", correct: 1}, {answer: "ENSE 352", correct: 0}, {answer: "ENSE 374", correct: 0}]
-// await addQuestion(courseName, ownerName, question, answers);
 
-// }
+  function generateQuiz(courseName, ownerName, questions, callback){
+    const quiz = new Quiz ({
+        courseName: courseName,
+        ownerName: ownerName,
+        timeTaken: 0,
+        grade: 0.0,
+        questions: questions
+    });
+    quiz.save(function(err,docs){
+        callback(null,docs);
+    });
+}
+
+function getQuizQuestions(quizQuestions, callback) {
+    Question.find().where('_id').in(quizQuestions).exec((err, docs) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, docs);
+      }
+    });
+  };
+

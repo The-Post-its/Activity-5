@@ -60,3 +60,22 @@ const questionSchema = module.exports = new mongoose.Schema ({
 })
 
 const Question = module.exports = new mongoose.model("Question", questionSchema)
+
+
+
+///////////////////     QUIZ MODEL   /////////////////// 
+const quizSchema = module.exports = new mongoose.Schema ({
+    courseName: String,
+    ownerName: String,
+    timeTaken: Date,
+    grade: Number,
+    
+    questions: [{
+        question: questionSchema,
+        answerSelected: String
+    }]
+})
+
+const Quiz = module.exports = new mongoose.model("Quiz", quizSchema)
+
+
