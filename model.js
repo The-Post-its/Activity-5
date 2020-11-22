@@ -47,16 +47,59 @@ const courseSchema = module.exports = new mongoose.Schema ({
 const Course = module.exports = new mongoose.model("Course", courseSchema)
 
 
-
-///////////////////     Q A MODEL      /////////////////// 
+///////////////////     Q and A MODEL   /////////////////// 
 const questionSchema = module.exports = new mongoose.Schema ({
     courseName: String,
     ownerName: String,
     question: String,
-    answers: [{
-        answer: String,
+    
+    Answers: [{
+        question: String,
         correct: Boolean
     }]
 })
 
 const Question = module.exports = new mongoose.model("Question", questionSchema)
+
+
+///////////////////     QUIZ MODEL   /////////////////// 
+const quizSchema = module.exports = new mongoose.Schema ({
+    courseName: String,
+    ownerName: String,
+    timeTaken: Date, //date creates a full timestamp
+    grade: Double,
+    
+    questions: [{
+        question: questionSchema,
+        answerSelected: String
+    }]
+})
+
+const Quiz = module.exports = new mongoose.model("Quiz", quizSchema)
+
+
+
+
+
+
+
+function getEnrollment(callback) {
+    console.log("GET ENROLLMENT MODEL FUNCTION")
+    User.findOne(
+        { username: username },
+        { _id: 0, enrollment: 1}
+     ).lean().exec(function (err, docs) {
+        if(err){
+            //console.log(err);
+        }
+        //console.log(docs); // returns json
+        callback(docs);
+        res.render("home", {username:username, classList: docs});
+    });
+  };
+
+
+///////////////////     EXPORTS    /////////////////// 
+
+module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Course', courseSchema);
