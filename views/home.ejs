@@ -75,7 +75,7 @@
     </nav>
       
 
-    <div class="d-md-flex flex-md-equal w-100">
+    <div class="d-md-flex justify-content-center w-100">
         <div class="text-center">
             <div class="my-3 py-3">
                 
@@ -122,26 +122,31 @@
             <div class="my-3 p-3">
                 <h2 class="display-5">My Quizzes</h2>
                 <div class="list-group">
+                    <% for(var item of quizResults){%>
                     <div class = "list-group-item">
-                        <span>
-                            <span class = "lead">90%</span>
-                            <span>ENSE 352</span>
-                            <span>Quiz #1241</span>
-                            <span>Nov 12, 2020 10:24am</span>
-                            <button type="button" class="btn btn-default">RETAKE</button>
-                            <button type="button" class="btn btn-default">VIEW</button>
-                        </span>
+                        <div class="container">
+                            <div class="row align-items-center">
+                            <div class = "text-left">
+                            <p>Class: <%=item.courseName%>    <span class = "lead blue">Grade: <%=item.grade%>%</span></p>
+                            <p>Quiz # <%=item._id%></p>
+                            <p>Date Taken: <%=moment(item.timeTaken).format('MMM-DD-YYYY hh:mm')%></p>
+                        </div>
+                            <div class="col-sm">
+                                <form class ="form-inline" method = "post" action = "">
+                                    <input type="hidden" name="quizId" value="<%=item._id%>">
+                                    <button type="submit" class="btn btn-default">RETAKE</button>
+                                </form>
+                              </div>
+                              <div class="col-sm">
+                                <form class ="form-inline"  method = "post" action = "">
+                                    <input type="hidden" name="quizId" value="<%=item._id%>">
+                                    <button type="submit" class="btn btn-default">VIEW</button>
+                                    </form>
+                              </div>
                     </div>
-                    <div class = "list-group-item">
-                        <span>
-                            <span class = "lead">80%</span>
-                            <span>ENSE 374</span>
-                            <span>Quiz #341</span>
-                            <span>Nov 11, 2020 10:30am</span>
-                            <button type="button" class="btn btn-default">RETAKE</button>
-                            <button type="button" class="btn btn-default">VIEW</button>
-                        </span>
-                    </div>
+                </div>
+            </div>
+                    <%}%>
                   </div>
             </div>
         </div>

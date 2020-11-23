@@ -14,6 +14,11 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 app.set("view engine","ejs");
+const moment = require("moment");
+app.use((req, res, next)=>{
+    res.locals.moment = moment;
+    next();
+  });
 
 // MONGOOSE
 const mongoose = require("mongoose");
@@ -94,11 +99,25 @@ app.post("/register", function(req, res) {
 // HOME
 app.post("/home", function(req, res) {
 
-getEnrollment(function(enrollment){
-    res.render("home", {classList: enrollment});
+
+// getEnrollment(function(enrollment){
+//     res.render("home", {classList: enrollment});
+// });
+
+Quiz.find({ ownerName: ssn.email },function (err, docs1) {
+    User.findOne(
+        { username: ssn.email },
+        { _id: 0, enrollment: 1}
+        ).lean().exec(function (err, docs2) {
+            res.render("home", {
+                quizResults : docs1,
+                classList : docs2
+            });
+        });
+    });
 });
 
-});
+
 
 // MANAGE COURSES
 app.post("/manageCourses",
@@ -360,3 +379,12 @@ function getQuizQuestions(quizQuestions, callback) {
     });
   };
 
+  function getUserQuizzes(callback) {
+    Quiz.find({ownerName: ssn.email}, function(err, docs) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, docs);
+        }
+      });
+    };

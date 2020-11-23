@@ -285,3 +285,18 @@ await addQuestion(courseName, ownerName, question, answers);
 
 //generateQuizzes();
 
+function getUserQuizzes(callback) {
+    Quiz.find({ownerName: "Roxanne"}, function(err, docs) {
+        if (err) {
+          callback(err, null);
+        } else {
+           
+          callback(null, docs);
+        }
+      });
+    };
+
+    getUserQuizzes(function(err, docs) {
+      
+        console.log(docs)
+    });

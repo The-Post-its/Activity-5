@@ -30,13 +30,17 @@ p {
     border: 0;
     border-bottom: 8px solid #52d6f4;
 }
+.blue{
+    color: #52d6f4;
+    border: 1px solid lightgrey;
+    padding: 2px;
+}
 
 .btn-default {
     border: 1px solid lightgrey;
     background-color: white;
     min-width: 100px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 6px;
 
 }
 .btn[disabled]:hover {
