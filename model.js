@@ -56,7 +56,8 @@ const questionSchema = module.exports = new mongoose.Schema ({
     answers: [{
         answer: String,
         correct: Boolean
-    }]
+    }],
+    answerExplanation: String
 })
 
 const Question = module.exports = new mongoose.model("Question", questionSchema)
