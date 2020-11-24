@@ -98,6 +98,73 @@ var answerExplanation = "MSB means Most Significant Bit and refers to the leftmo
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 // COPY LINES 92 - 98 AND FILL IN YOUR QUESTIONS
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "A logical circuit with 3 inputs will have how many possible input conditions?";
+var answers = [{answer: "1", correct: 0}, {answer: "8", correct: 1}, {answer: "3", correct: 0}, {answer: "6", correct: 0}]
+var answerExplanation = "The number of input combinations is 2^n where n is the number of inputs. Therefore 2^3 = 8 possible conditions.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "What is the decimal number for binary 1001?";
+var answers = [{answer: "9", correct: 1}, {answer: "2", correct: 0}, {answer: "17", correct: 0}, {answer: "6", correct: 0}]
+var answerExplanation = "1001 = 1*2^3 + 0*2^2 + 0*2^1 + 1*2^0 = 9.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Boolean variables have how many states?";
+var answers = [{answer: "0", correct: 0}, {answer: "1", correct: 0}, {answer: "2", correct: 1}, {answer: "n", correct: 0}]
+var answerExplanation = "Boolean variables can have a value of either 0 or 1 therefore 2 possible states.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "What is the correct boolean expression for A 'OR' B?";
+var answers = [{answer: "Y = A / B", correct: 0}, {answer: "Y = AB", correct: 0}, {answer: "Y = A + B", correct: 1}]
+var answerExplanation = "The symbol for 'or' is + therefore Y = A + B";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "LEDs can be wired to display either active-low or active-high?";
+var answers = [{answer: "True", correct: 1}, {answer: "False", correct: 0}]
+var answerExplanation = "True. Depending on wiring orientation LEDs can light up with input is high or low.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "In boolean logic 'OR' is performed first, followed by 'AND'?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}, {answer: "There is no precedence.", correct: 0}]
+var answerExplanation = "Unless otherwise specified, in Boolean expressions AND functions are performed first, followed by ORs.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "For circuit descriptions SOP stands for?";
+var answers = [{answer: "Some Operating Procedure", correct: 0}, {answer: "Sum Of Products", correct: 1}, {answer: "Some Operator Precedence", correct: 0}, {answer: "Sum Of Processes", correct: 0}]
+var answerExplanation = "Sum Of Products: A Boolean expression where several product terms are summed (ORed) together.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Boolean expressions cannot be simplified?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "There are 24 theorems used to minimize a Boolean expression to reduce the number of logic gates in a network.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Using boolean simplification theorems: x + x = ?";
+var answers = [{answer: "x", correct: 1}, {answer: "0", correct: 0}, {answer: "2x", correct: 0}, {answer: "1", correct: 0}]
+var answerExplanation = "Theorem 14 states that x + x = x.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Which of the following K-Map groupings does not result in variables cancelling?";
+var answers = [{answer: "pair", correct: 0}, {answer: "triplet", correct: 1}, {answer: "quad", correct: 0}, {answer: "octet", correct: 0}]
+var answerExplanation = "Theorem 14 states that x + x = x.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+
+
+
+// ENSE 352 COURSE QUESTIONS
+
+
+// ENSE 374 COURSE QUESTIONS
 
 }
 //UNCOMMENT TO RUN ADD QUESTIONS DB
