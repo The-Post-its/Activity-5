@@ -91,7 +91,7 @@ function addQuestion(courseName, ownerName, question, answers, answerExplanation
 async function addQuestions(){
 // ENEL 384 COURSE QUESTIONS
 var courseName = "ENEL 384";
-var ownerName = "Student";
+var ownerName = "Roxanne";
 var question = "For binary numbers MSB stands for what?";
 var answers = [{answer: "Most Signed Bit", correct: 0}, {answer: "Many Signed Bits", correct: 0}, {answer: "Most Significant Bit", correct: 1}]
 var answerExplanation = "MSB means Most Significant Bit and refers to the leftmost bit with the highest weight.";
@@ -99,13 +99,13 @@ await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 // COPY LINES 92 - 98 AND FILL IN YOUR QUESTIONS
 var courseName = "ENEL 384";
-var ownerName = "Student";
+var ownerName = "Roxanne";
 var question = "A logical circuit with 3 inputs will have how many possible input conditions?";
 var answers = [{answer: "1", correct: 0}, {answer: "8", correct: 1}, {answer: "3", correct: 0}, {answer: "6", correct: 0}]
 var answerExplanation = "The number of input combinations is 2^n where n is the number of inputs. Therefore 2^3 = 8 possible conditions.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 var courseName = "ENEL 384";
-var ownerName = "Student";
+var ownerName = "Roxanne";
 var question = "What is the decimal number for binary 1001?";
 var answers = [{answer: "9", correct: 1}, {answer: "2", correct: 0}, {answer: "17", correct: 0}, {answer: "6", correct: 0}]
 var answerExplanation = "1001 = 1*2^3 + 0*2^2 + 0*2^1 + 1*2^0 = 9.";
@@ -162,10 +162,130 @@ await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 
 // ENSE 352 COURSE QUESTIONS
+var courseName = "ENSE 352";
+var ownerName = "Roxanne";
+var question = "ROM (Read Only Memory) is not randomly accessible?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "False. RAM and ROM are both randomly accessible. Even though ROM is read-only, it can still be accessed.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Roxanne";
+var question = "In von Neummann architecture data and instructions are _____ ?";
+var answers = [{answer: "Both stored together in the same memory", correct: 1}, {answer: "Stored in their own memory", correct: 0}, {answer: "von Neummann is not an architecture", correct: 0}, {answer: "Not stored in memory", correct: 0}]
+var answerExplanation = "Data and instructions are both stored together in the same memory, and accessed through a single bus. Commonly used in general purpose computers.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "In binary the integer part and fractional part are seperated by a dot called?";
+var answers = [{answer: "The decimal point", correct: 0}, {answer: "The binary point", correct: 0}, {answer: "The radix point", correct: 0}, {answer: "All of the above", correct: 1}]
+var answerExplanation = "These are all correct. In some cultures this dot is instead a comma.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "A pointer is a location in memory?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "In address is a location in memory while a pointer is a data object that contains an address.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "In two's complement arithmetic which expression gives -x?";
+var answers = [{answer: "-x", correct: 0}, {answer: "~x", correct: 0}, {answer: "~x+1", correct: 1}, {answer: "~x-1", correct: 0}]
+var answerExplanation = "Example binary 001: ~x = 110 + 1 = 111 = -x therefore ~x+1.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "In two's complement arithmetic which expression gives -x?";
+var answers = [{answer: "-x", correct: 0}, {answer: "~x", correct: 0}, {answer: "~x+1", correct: 1}, {answer: "~x-1", correct: 0}]
+var answerExplanation = "Example binary x = 001: ~x = 110 + 1 = 111 = -x therefore ~x+1.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "For an unsigned value x: x>>1 performs what operation?";
+var answers = [{answer: "x/1", correct: 0}, {answer: "x*2", correct: 0}, {answer: "x/2", correct: 1}, {answer: "x-1", correct: 0}]
+var answerExplanation = "Example binary x = 0100 = 4: x>>1 = 0010 = 2 therefore x/2.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "For floating point numbers, k is used to denote what?";
+var answers = [{answer: "Sign", correct: 0}, {answer: "Bits in the frac field", correct: 0}, {answer: "Bits in the exp field", correct: 1}, {answer: "Normalization", correct: 0}]
+var answerExplanation = "k gives the number bits in the exp field while n gives the number of bits in the frac field.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "For all floating point numbers E = exp - Bias?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "False. For normalized values E = exp - Bias while for denormalized values E = 1 - Bias.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Student";
+var question = "In assembly LR stands for?";
+var answers = [{answer: "Link Register", correct: 1}, {answer: "Label Routine", correct: 0}, {answer: "Last Routine", correct: 0}, {answer: "Label Register", correct: 0}]
+var answerExplanation = "The link register (R14 or LR) stores the return address during a subroutine call.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+
 
 
 // ENSE 374 COURSE QUESTIONS
-
+var courseName = "ENSE 374";
+var ownerName = "Roxanne";
+var question = "Which of the following does not represent intellectual honesty?";
+var answers = [{answer: "Admitting your mistakes", correct: 0}, {answer: "Clearly understanding your programs", correct: 0}, {answer: "Providing low estimates to make managers happy", correct: 1}, {answer: "Refusing to pretend to be an expert", correct: 0}]
+var answerExplanation = "Do not underestimate when asked to estimate – the underestimate becomes reality.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Once you finish your degree you know all you need to know about software?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "False. Knowledge is an expiring asset and as an engineer you should strive to be a life long learner.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "When taking on a new project where should you start?";
+var answers = [{answer: "With the coding", correct: 0}, {answer: "With the planning", correct: 0}, {answer: "With the why", correct: 1}]
+var answerExplanation = "Always start with the why. Why are you creating something, who are you creating it for and what benefit does it bring to users?";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "It is always a good idea to share your stakeholder analysis with everyone on the project, including stakeholders?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "False. Stakeholder analysis documents may contain opinions or descriptions that could offend stakeholders and make them unsupportive?";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Risk planning is an important, often overlooked step in the project lifecycle?";
+var answers = [{answer: "True", correct: 1}, {answer: "False", correct: 0}]
+var answerExplanation = "If risks are not discussed and no response plan is created, teams may not be prepared to deal with unforseen events. This could cause significant project delays.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Which design method is a linear approach to design and development?";
+var answers = [{answer: "Waterfall", correct: 1}, {answer: "Agile", correct: 0}, {answer: "KANBAN", correct: 0}, {answer: "RUP", correct: 0}]
+var answerExplanation = "Waterfall is a method that moves linearly through project stages and ensures one step is completed before moving on to anything else.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Which of the following is not an aspect of empiricism?";
+var answers = [{answer: "Transparency", correct: 0}, {answer: "Inspection", correct: 0}, {answer: "Rigidity", correct: 1}, {answer: "Adaptation", correct: 0}]
+var answerExplanation = "Empiricism is an importany concept relating to the scrum framework that allows people to address complex adaptive problems. Rigidity does not apply.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Which of the following does not describe scrum?";
+var answers = [{answer: "Every month of the sprint", correct: 1}, {answer: "15 minute time box", correct: 0}, {answer: "24 hour team plans", correct: 0}, {answer: "Minimize interaction", correct: 0}]
+var answerExplanation = "Daily scrums are meant to be short team meetings to quickly evaluate progress and plan the coming day.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "KANBAN is a method of what?";
+var answers = [{answer: "Reflection", correct: 0}, {answer: "Visualization", correct: 1}, {answer: "Coding", correct: 0}]
+var answerExplanation = "KANBAN is a just-in-time method of visualizing tasks left to be completed.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Student";
+var question = "Refactoring is an unnecessary step in software development?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "Software is often improved and refactored throughout a software's development to avoid software rot.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 }
 //UNCOMMENT TO RUN ADD QUESTIONS DB
 //addQuestions();

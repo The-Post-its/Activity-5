@@ -178,6 +178,10 @@ input[type="checkbox"] {
 .right-margin{
     margin-right: 60px;
 }
+.home-margin{
+    margin-left: 40px;
+    margin-right: 40px;
+}
 .top-margin{
     margin-top: 50px;
 }
