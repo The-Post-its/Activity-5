@@ -70,10 +70,14 @@ const quizSchema = module.exports = new mongoose.Schema ({
     ownerName: String,
     timeTaken: Date,
     grade: Number,
-    
     questions: [{
-        question: questionSchema,
-        answerSelected: String
+        question: questionSchema
+    }],
+    results: [{
+        _id: false,
+        quizQuestionId: String,
+        answerSelected: String,
+        answerCorrect: Boolean
     }]
 })
 

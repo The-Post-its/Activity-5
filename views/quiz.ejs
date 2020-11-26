@@ -61,23 +61,24 @@
 
 <main>
 
- <form>
+ <form method = "post" action = "/saveQuiz">
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-7">
                 <div class="border">
-                        
+                    <input type="hidden" name="quizId" value="<%=quizContent._id%>">
                         <% var questionCount = 1;
                         for (var item of quizContent.questions) { %>
                             
                              <div class="question bg-white p-3 border-bottom">
                                  <div class="d-flex flex-row align-items-center question-title">
-                                <input type="hidden" name="questionId" value="<%=item._id%>">
+                                <input type="hidden" name="question" value="<%=item._id%>">
                                  <p class="">Q<%=questionCount%>: <%=item.question.question%></p>
                                  </div>
                                  <%  for (var i=0; i<item.question.answers.length; i++) {%>
+                                     
                                 <div class="ans">
-                                     <label class="radio"> <input type="radio"> <span><%=item.question.answers[i].answer%></span>
+                                     <label class="radio"> <input type="radio" name ="<%=item._id%>" value="<%=item.question.answers[i]._id%>">   <%=item.question.answers[i].answer%></input>
                                      </label>
                                  </div>
                                 

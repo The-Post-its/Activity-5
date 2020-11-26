@@ -181,6 +181,7 @@ input[type="checkbox"] {
 .home-margin{
     margin-left: 40px;
     margin-right: 40px;
+    min-width: 400px;
 }
 .top-margin{
     margin-top: 50px;

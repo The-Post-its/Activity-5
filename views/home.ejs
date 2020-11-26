@@ -121,6 +121,16 @@
         <div class="text-center home-margin">
             <div class="my-3 p-3">
                 <h2 class="display-5">My Quizzes</h2>
+                <% if((quizResults.length ==0)&(classList.enrollment.length ==0)){%>
+                    <br><br>
+                    <h5>Want to take a quiz?</h5>
+                    <h5>Add courses to get started!</h5>
+                <%}else if(quizResults.length ==0){%>
+                    <br><br>
+                    <h5>Ready to take a quiz?!</h5>
+                    <h5>Click the <em>'Quiz'</em> button!</h5>
+                <%}%>
+
                 <div class="list-group">
                     <% for(var item of quizResults){%>
                     <div class = "list-group-item">

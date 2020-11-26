@@ -110,6 +110,8 @@ var question = "What class is this for?";
 var answers = [{answer: "ENEL 384", correct: 1}, {answer: "ENSE 352", correct: 0}, {answer: "ENSE 374", correct: 0}]
 await addQuestion(courseName, ownerName, question, answers);
 
+
+
 }
 //UNCOMMENT TO RUN ADD QUESTIONS DB
 //addQuestions();
@@ -118,9 +120,115 @@ await addQuestion(courseName, ownerName, question, answers);
 
 
 
+
+
+
+
+
 ///////////////////     TESTING COMPLETE     ///////////////////
 
+// function getQuizQuestions(quizQuestions, callback) {
+//     Question.find().where('_id').in(quizQuestions).exec((err, docs) => {
+//       if (err) {
+//         callback(err, null);
+//       } else {
+//         callback(null, docs);
+//       }
+//     });
+//   };
 
+// async function testing(){
+// var quizId = "5fbecf8b3038b0ac63400748";
+// var quizQuestions = [
+//     {
+//       question: '5fbecf8b3038b0ac63400749',
+//       answer: '5fbd2060323a2c8859d963d2'
+//     },
+//     {
+//       question: '5fbecf8b3038b0ac6340074f',
+//       answer: '5fbd2060323a2c8859d963dc'
+//     }
+//   ];
+
+//   await getQuiz(quizId, async function(err, docs) {
+//     var questionArray = [];
+//     docs.questions.forEach(item => {
+//      if(item != ''){
+//     questionArray.push({
+//         question: item
+//     });
+//          }
+//      }
+//      );
+     
+//      //console.log(questionArray)
+
+//      for(var i =0; i<questionArray.length; i++){
+//          console.log(questionArray[i].question.question.answers)
+//          for(var k = 0; k<quizQuestions.length; k++){
+//              // update answers in questionarray
+//              if(questionArray[i].question._id == quizQuestions[k].question){
+//                  questionArray[i].question.answerSelected = quizQuestions[k].answer;
+//                  for(var l = 0;l<questionArray[i].question.question.answers.length; l++){
+//                      if(questionArray[i].question.question.answers._id == quizQuestions[k].answer){
+//                         questionArray[i].question.answerCorrect = questionArray[i].question.question.answers.correct;
+//                      }
+//                  }
+//              }
+//          }
+//      }
+//      var grade = 90;
+
+//      //console.log(questionArray)
+//      await updateQuiz(quizId, questionArray, grade, function(err, docs) {
+
+//      });
+
+
+//     });
+// }
+
+// //testing();
+//   function getQuiz(quizId, callback) {
+//         Quiz.findOne(
+//             {"_id": quizId},
+//             {}
+//         ).lean().exec(function (err, docs) {
+//           if (err) {
+//             callback(err, null);
+//           } else {
+//               console.log(docs);
+//             callback(null, docs);
+//           }
+//         });
+//       };
+
+
+
+// function updateQuiz(quizId, questions, grade, callback){
+//     Quiz.findOneAndUpdate(
+//      {"_id": quizId},
+//      {  grade: grade,
+//         timeTaken: now,
+//         questions: questions}
+//     ).lean().exec(function (err, docs) {
+//                 if(err){
+//                     console.log(err);
+//                     return callback(JSON.stringify(docs));
+//                 }
+//                 //console.log(docs); // returns json
+//                 return callback(JSON.stringify(docs));
+//             });
+// };
+
+
+// updateQuiz(function(userQuestions){
+//    console.log(userQuestions);
+//     //var jsonUserQuestions = JSON.stringify(userQuestions);
+
+//    // console.log(jsonUserQuestions);
+//     //console.log(JSON.stringify(userQuestions));
+// });
 
 // var getUserQuestions = function (callback) {
 //     Question.find(
@@ -285,18 +393,18 @@ await addQuestion(courseName, ownerName, question, answers);
 
 //generateQuizzes();
 
-function getUserQuizzes(callback) {
-    Quiz.find({ownerName: "Roxanne"}, function(err, docs) {
-        if (err) {
-          callback(err, null);
-        } else {
+// function getUserQuizzes(callback) {
+//     Quiz.find({ownerName: "Roxanne"}, function(err, docs) {
+//         if (err) {
+//           callback(err, null);
+//         } else {
            
-          callback(null, docs);
-        }
-      });
-    };
+//           callback(null, docs);
+//         }
+//       });
+//     };
 
-    getUserQuizzes(function(err, docs) {
+//     getUserQuizzes(function(err, docs) {
       
-        console.log(docs)
-    });
+//         console.log(docs)
+//     });

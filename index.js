@@ -184,6 +184,7 @@ async function(req,res){
     var question = req.body.question;
     var correctAnswer = req.body.correctAnswer;
     var answerArray = req.body.answer;
+    var answerExplanation = req.body.answerExplanation;
 
        var answers = [];
        // push correct answer
@@ -199,7 +200,7 @@ async function(req,res){
         }
         );
  // add question to database
-    await addQuestion(courseName, ownerName, question, answers);
+    await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 // reload the page
     res.redirect(307, "/courseMaterial")
 
@@ -218,7 +219,7 @@ function(req,res){
    
     getAllCourseQuestions(courseName, function(err, docs) {
         if (err) {
-          console.log(err);
+          //console.log(err);
         }
 
         // ADD ALL QUESTION IDS TO AN ARRAY
@@ -251,16 +252,20 @@ function(req,res){
             docs.forEach(item => {
              if(item != ''){
             questions.push({
-                question: item,
-                answerSelected: ""
+                question: item
             });
                  }
              }
              );
+             var results = [{
+                 quizQuestionId: "",
+                 answerSelected: "",
+                 answerCorrect: false
+             }]
              // CREATE AND SAVE THE QUIZ
              // REDIRECT TO QUIZ PAGE
-             generateQuiz(courseName, ssn.email, questions, function(err, docs) {
-                    console.log(docs);
+             generateQuiz(courseName, ssn.email, questions, results, function(err, docs) {
+                    //console.log(docs);
                     res.render("quiz", {
                         quizContent : docs
                      });
@@ -270,6 +275,93 @@ function(req,res){
     });
    
   }
+
+});
+
+// ADD QUESTION 
+app.post("/saveQuiz",
+async function(req,res){
+//console.log(req.body)
+    var quizId = req.body.quizId;
+    //console.log(quizId)
+    var question = req.body.question;
+    var quizQuestions = [];
+    question.forEach(item => {
+        quizQuestions.push({
+            question: item,
+            answer: req.body[item]
+        });
+        }
+        );
+//console.log(quizQuestions);
+
+await getQuiz(quizId, async function(err, docs) {
+    var questionArray = [];
+    docs.questions.forEach(item => {
+     if(item != ''){
+    questionArray.push({
+        question: item,
+    });
+         }
+     }
+     );
+     //console.log(questionArray)
+     var results = [];
+     docs.questions.forEach(item => {
+      if(item != ''){
+        results.push({
+         quizQuestionId: item._id,
+         answerSelected: "",
+         answerCorrect: false
+     });
+          }
+      }
+      );
+    // console.log(results)
+
+     for(var i =0; i<questionArray.length; i++){
+         //console.log(questionArray[i].question.question.answers)
+         for(var k = 0; k<quizQuestions.length; k++){
+             // update answers in questionarray
+             if(questionArray[i].question._id == quizQuestions[k].question){
+                 for(var m = 0; m<results.length; m++){
+                     if(questionArray[i].question._id == results[m].quizQuestionId){
+                        results[m].answerSelected = quizQuestions[k].answer;
+        
+                     for(var l = 0;l<questionArray[i].question.question.answers.length; l++){
+                        if(questionArray[i].question.question.answers[l]._id == quizQuestions[k].answer){
+                            results[m].answerCorrect = questionArray[i].question.question.answers[l].correct;
+                        }
+                    }
+                }
+                 }
+                 
+             }
+         }
+     }
+     //console.log(results);
+     // get resulting grade
+     var grade = 0;
+     for(var i =0; i<results.length; i++){
+        if(results[i].answerCorrect == true){
+            grade ++;
+        }
+    }
+     var grade = grade / results.length * 100;
+
+     //console.log(questionArray)
+    
+    await updateQuiz(quizId, results, grade, function(err, docs) {
+        res.render("results",{
+            results: docs
+        });
+     });
+
+
+    });
+
+
+
 
 });
 
@@ -346,23 +438,25 @@ function clearEnrollment(usernameTest){
   };
 
 
-function addQuestion(courseName, ownerName, question, answers){
+function addQuestion(courseName, ownerName, question, answers, answerExplanation){
     const userQuestion = new Question ({
         courseName: courseName,
         ownerName: ownerName,
         question: question,
-        answers: answers
+        answers: answers,
+        answerExplanation: answerExplanation
     });
     userQuestion.save();
 }
 
-  function generateQuiz(courseName, ownerName, questions, callback){
+  function generateQuiz(courseName, ownerName, questions, results, callback){
     const quiz = new Quiz ({
         courseName: courseName,
         ownerName: ownerName,
         timeTaken: 0,
         grade: 0.0,
-        questions: questions
+        questions: questions,
+        results: results
     });
     quiz.save(function(err,docs){
         callback(null,docs);
@@ -388,3 +482,38 @@ function getQuizQuestions(quizQuestions, callback) {
         }
       });
     };
+
+
+    function getQuiz(quizId, callback) {
+        Quiz.findOne(
+            {"_id": quizId},
+            {}
+        ).lean().exec(function (err, docs) {
+          if (err) {
+            callback(err, null);
+          } else {
+              //console.log(docs);
+            callback(null, docs);
+          }
+        });
+      };
+
+ async function updateQuiz(quizId, results, grade, callback){
+    // console.log(results);
+     await Quiz.findOneAndUpdate(
+         {"_id": quizId},
+         {  grade: grade,
+            timeTaken: Date.now(),
+           $set: { results: results }}
+        ).lean().exec(function (err, docs) {
+            if (err) {
+                //console.log(err)
+                callback(err, null);
+              } else {
+                  //console.log(docs);
+                callback(null, docs);
+              }
+                });
+    };
+
+
