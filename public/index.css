@@ -32,7 +32,6 @@ h5 {
 }
 .blue{
     color: #52d6f4;
-    border: 1px solid lightgrey;
     padding: 2px;
 }
 
@@ -178,6 +177,9 @@ input[type="checkbox"] {
 .right-margin{
     margin-right: 60px;
 }
+.left-margin{
+    margin-left: 60px;
+}
 .home-margin{
     margin-left: 40px;
     margin-right: 40px;
@@ -185,6 +187,9 @@ input[type="checkbox"] {
 }
 .top-margin{
     margin-top: 50px;
+}
+.grade-margin{
+    margin-left: 20px;
 }
 
 

@@ -27,7 +27,9 @@
                     <h2><%=results.courseName%> Quiz </h2>
                 </div>
               <div class="col-4 d-flex justify-content-end align-items-center text-left">
-                <h2># <%=results._id%> </h2>
+                <%var idString = results._id.toString()%>
+                <%var displayId = idString.toUpperCase().substr(idString.length-4)%>
+                <h2># <%=displayId%> </h2>
             </div>
         </header>
     
@@ -39,12 +41,6 @@
                 <li class="nav-item active">
                     <form method = "post" action ="home">
                     <button type="submit" class="btn" enabled>Home</button>
-                    </form>
-                </li>
-    
-                <li class="nav-item">
-                    <form method = "post" action ="/manageCourses">
-                    <button type="submit" class="btn" disabled>Manage Courses</button>
                     </form>
                 </li>
      
@@ -93,8 +89,12 @@
                                                <%  if((results.results[m].answerSelected == item.question.answers[k]._id)&(results.results[m].answerCorrect == true)){%>
                                                     <p class="text-success selected"><%=item.question.answers[k].answer%></p>
                                                 <% }else if((results.results[m].answerSelected == item.question.answers[k]._id)&(results.results[m].answerCorrect == false)){%>
-                                                        <p class="text-danger selected"><%=item.question.answers[k].answer%></p>
-                                                    <% } else{%>
+                                                        <p class="text-danger selected"><%=item.question.answers[k].answer%> <span class = "grade-margin"><em>*Answer Selected*</em></span></p>
+                                                    <% }else if((item.question.answers[k].correct == true)&(results.results[m].answerSelected == "BLANK")){%>
+                                                        <p class="text-success selected"><%=item.question.answers[k].answer%><span class = "grade-margin"><em>*No Answer Selected*</em></span></p>
+                                                        <% }else if(item.question.answers[k].correct == true){%>
+                                                            <p class="text-success selected"><%=item.question.answers[k].answer%></p>
+                                                        <% } else{%>
                                                     <p class="selected"><%=item.question.answers[k].answer%></p>
                                              <%}}}}%>
                                      <p>Explanation: <%=item.question.answerExplanation%></p>
@@ -105,10 +105,14 @@
                 </div>
             </div>
             <div class="text-center top-margin">   
-                <form method = "post" action = "/home">
-                <button type="submit" class="btn btn-default">Home</button>
-                </form>>
-            </div>
+            
+                <form method = "post" action = "/retake">
+                    <input type="hidden" name="quizId" value="<%=results._id%>">
+                    <input type="hidden" name="courseName" value="<%=results.courseName%>">
+                    <button type="submit" class="btn btn-default">Retake</button>
+                    </form>
+                </div>
+         
             <div class="container mt-5">
                 <!--By including this empty section the formatting of the page does not break-->
                 <div class="d-flex justify-content-center row">
@@ -121,12 +125,11 @@
     </main>
     
     
-    
-      <footer class="footer mt-auto py-3">
+    <footer class="footer mt-auto py-3">
         <div class="container text-center">
-          <p class = "small muted">© 2020 Copyright: The Post-Its               Ria Chevli - Roxanne Harrison - Shane Toma</p>
+          <p class = "small muted">© 2020 Copyright: The Post-Its <span class = "left-margin">Ria Chevli - Roxanne Harrison - Shane Toma</span></p>
         </div>
-      </footer>
+    </footer>
     
     
     </body>

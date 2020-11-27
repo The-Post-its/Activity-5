@@ -60,7 +60,7 @@ function(req,res){
 
 // LOGIN CONTROLLER
 app.post('/login', function(req,res, next) {
-    console.log("LOGIN CONTROLLER")
+   // console.log("LOGIN CONTROLLER")
     
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
@@ -76,7 +76,7 @@ app.post('/login', function(req,res, next) {
 
 // REGISTER CONTROLLER
 app.post("/register", function(req, res) {
-    console.log("REGISTER CONTROLLER");
+    //console.log("REGISTER CONTROLLER");
 
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
@@ -114,7 +114,7 @@ Quiz.find({ ownerName: ssn.email },function (err, docs1) {
                 classList : docs2
             });
         });
-    });
+    }).sort('-timeTaken');
 });
 
 
@@ -326,7 +326,10 @@ await getQuiz(quizId, async function(err, docs) {
              if(questionArray[i].question._id == quizQuestions[k].question){
                  for(var m = 0; m<results.length; m++){
                      if(questionArray[i].question._id == results[m].quizQuestionId){
-                        results[m].answerSelected = quizQuestions[k].answer;
+                         if(quizQuestions[k].answer == undefined){
+                            results[m].answerSelected = "BLANK";
+                         }else{results[m].answerSelected = quizQuestions[k].answer;}
+                        
         
                      for(var l = 0;l<questionArray[i].question.question.answers.length; l++){
                         if(questionArray[i].question.question.answers[l]._id == quizQuestions[k].answer){
@@ -356,7 +359,7 @@ await getQuiz(quizId, async function(err, docs) {
      });
 
      await getQuiz(quizId, function(err, docs){
-        console.log(docs)
+        //console.log(docs)
         res.render("results",{
             results: docs
         });
@@ -374,12 +377,72 @@ await getQuiz(quizId, async function(err, docs) {
 app.post("/results",
 async function(req,res){
     var quizId = req.body.quizId;
-    
+
     await getQuiz(quizId, function(err, docs){
-        console.log(docs)
+        //console.log(docs)
         res.render("results",{
             results: docs
         });
+     });
+ 
+});
+
+// ABANDON
+app.post("/abandon",
+async function(req,res){
+    var quizId = req.body.quizId;
+    
+    await deleteQuiz(quizId, function(err, docs){
+        
+     });
+     res.redirect(307, "/home")
+ 
+});
+
+// RETAKE
+app.post("/retake",
+async function(req,res){
+    var quizId = req.body.quizId;
+    var courseName = req.body.courseName;
+    
+    await getQuiz(quizId, function(err, docs){
+        //console.log(docs)
+        var quizQuestions = [];
+        docs.questions.forEach(item => {
+         if(item != ''){
+            quizQuestions.push(
+           item.question._id
+        );
+             }
+         }
+         
+         );
+                  // GET THE QUESTIONS TO ADD TO QUIZ
+                  getQuizQuestions(quizQuestions, function(err, docs) {
+                    var questions = [];
+                    docs.forEach(item => {
+                     if(item != ''){
+                    questions.push({
+                        question: item
+                    });
+                         }
+                     }
+                     );
+                     var results = [{
+                         quizQuestionId: "",
+                         answerSelected: "",
+                         answerCorrect: false
+                     }]
+                     // CREATE AND SAVE THE QUIZ
+                     // REDIRECT TO QUIZ PAGE
+                     generateQuiz(courseName, ssn.email, questions, results, function(err, docs) {
+                            //console.log(docs);
+                            res.render("quiz", {
+                                quizContent : docs
+                             });
+                    });
+                
+              });
      });
  
 });
@@ -536,4 +599,17 @@ function getQuizQuestions(quizQuestions, callback) {
                 });
     };
 
+    function deleteQuiz(quizId, callback) {
+        Quiz.findOneAndDelete(
+            {"_id": quizId},
+            {}
+        ).lean().exec(function (err, docs) {
+          if (err) {
+            callback(err, null);
+          } else {
+              //console.log(docs);
+            callback(null, docs);
+          }
+        });
+      };
 

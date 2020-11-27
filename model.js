@@ -78,8 +78,8 @@ const quizSchema = module.exports = new mongoose.Schema ({
         quizQuestionId: String,
         answerSelected: String,
         answerCorrect: Boolean
-    }]
-})
+    }, { minimize: false }]
+}, { minimize: false })
 
 const Quiz = module.exports = new mongoose.model("Quiz", quizSchema)
 

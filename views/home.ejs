@@ -137,13 +137,16 @@
                         <div class="container">
                             <div class="row align-items-center">
                             <div class = "text-left">
-                            <p>Class: <%=item.courseName%>    <span class = "lead blue">Grade: <%=item.grade%>%</span></p>
-                            <p>Quiz # <%=item._id%></p>
+                            <p>Class: <%=item.courseName%>    <span class = "lead blue grade-margin">Grade: <%=item.grade%>%</span></p>
+                            <%var idString = item._id.toString()%>
+                            <%var displayId = idString.toUpperCase().substr(idString.length-4)%>
+                            <p>Quiz # <%=displayId%></p>
                             <p>Date Taken: <%=moment(item.timeTaken).format('MMM-DD-YYYY hh:mm')%></p>
                         </div>
                             <div class="col-sm">
-                                <form class ="form-inline" method = "post" action = "">
+                                <form class ="form-inline" method = "post" action = "/retake">
                                     <input type="hidden" name="quizId" value="<%=item._id%>">
+                                    <input type="hidden" name="courseName" value="<%=item.courseName%>">
                                     <button type="submit" class="btn btn-default">RETAKE</button>
                                 </form>
                               </div>
@@ -173,7 +176,7 @@
 
   <footer class="footer mt-auto py-3">
     <div class="container text-center">
-      <p class = "small muted">© 2020 Copyright: The Post-Its               Ria Chevli - Roxanne Harrison - Shane Toma</p>
+      <p class = "small muted">© 2020 Copyright: The Post-Its <span class = "left-margin">Ria Chevli - Roxanne Harrison - Shane Toma</span></p>
     </div>
   </footer>
 
