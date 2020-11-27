@@ -123,8 +123,6 @@ await addQuestion(courseName, ownerName, question, answers);
 
 
 
-
-
 ///////////////////     TESTING COMPLETE     ///////////////////
 
 // function getQuizQuestions(quizQuestions, callback) {
