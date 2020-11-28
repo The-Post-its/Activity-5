@@ -67,9 +67,8 @@
         <div class="text-center">
             <div class="my-3 py-3">
     
-                    <h2 class="display-5">My Questions</h2>
-
-
+                    <h2 class="display-5"><u>My Questions</u></h2>
+                    <h5>Questions uploaded by you for <%=courseName%>!</h5>
                 <div class="list-group">
                     <div class = "list-group-item">
                         <div class="accordion" id="accordionExample">
@@ -101,8 +100,13 @@
                         <% if(item.ownerName == ssn.email){%>
                     <div class = "list-group-item">
                         <ul class="list-group">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapse<%=item._id%>" aria-expanded="false" aria-controls="collapseExample">
                             <li class="list-group-item list-group-item-dark"><%=item.question%></li>
+                         </button>
+                         <div class="collapse" id="collapse<%=item._id%>">
+                            <div class="card">
                             <%  for (var i=0; i<item.answers.length; i++) {%>
+                               
                                 <% if(item.answers[i].correct == true){%>
                                     <li class="list-group-item"><%=item.answers[i].answer%>
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check" fill="#52d6f4" xmlns="http://www.w3.org/2000/svg">
@@ -113,6 +117,8 @@
                                 <li class="list-group-item disabled"><%=item.answers[i].answer%></li>
                             <%}}%>
                             <li class="list-group-item disabled"><p><strong>Answer Explanation</strong></p><p><%=item.answerExplanation%></p></li>
+                        </div>
+                    </div>
                         </ul>
                     </div>
                     <%}}%>
@@ -122,7 +128,8 @@
 
         <div class="text-center">
             <div class="my-3 p-3">
-                <h2 class="display-5">Collaborative Questions</h2>
+                <h2 class="display-5"><u>Collaborative Questions</u></h2>
+                <h5>Questions contributed by other users in <%=courseName%>!</h5>
                 <div class="list-group"> 
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
@@ -139,7 +146,11 @@
                         <% if(item.ownerName != ssn.email){%>
                     <div class = "list-group-item">
                         <ul class="list-group">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapse<%=item._id%>" aria-expanded="false" aria-controls="collapseExample">
                             <li class="list-group-item list-group-item-dark"><%=item.question%></li>
+                        </button>
+                        <div class="collapse" id="collapse<%=item._id%>">
+                            <div class="card">
                             <%  for (var i=0; i<item.answers.length; i++) {%>
                                 <% if(item.answers[i].correct == true){%>
                                     <li class="list-group-item"><%=item.answers[i].answer%>

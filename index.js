@@ -211,7 +211,7 @@ app.post("/quiz",
 function(req,res){
 
   var courseName = req.body.courseName;
-  var questionCount = 2;
+  var questionCount = 5;
   randomizeQuestions(courseName, questionCount);
 
 // GENERATE A QUIZ
@@ -293,7 +293,7 @@ async function(req,res){
         });
         }
         );
-//console.log(quizQuestions);
+console.log(quizQuestions);
 
 await getQuiz(quizId, async function(err, docs) {
     var questionArray = [];
@@ -305,7 +305,7 @@ await getQuiz(quizId, async function(err, docs) {
          }
      }
      );
-     //console.log(questionArray)
+     console.log(questionArray)
      var results = [];
      docs.questions.forEach(item => {
       if(item != ''){
@@ -317,7 +317,7 @@ await getQuiz(quizId, async function(err, docs) {
           }
       }
       );
-    // console.log(results)
+     console.log(results)
 
      for(var i =0; i<questionArray.length; i++){
          //console.log(questionArray[i].question.question.answers)
@@ -352,14 +352,14 @@ await getQuiz(quizId, async function(err, docs) {
     }
      var grade = grade / results.length * 100;
 
-     //console.log(questionArray)
+     console.log(questionArray)
     
     await updateQuiz(quizId, results, grade, function(err, docs) {
 
      });
 
      await getQuiz(quizId, function(err, docs){
-        //console.log(docs)
+        console.log(docs)
         res.render("results",{
             results: docs
         });
@@ -405,7 +405,7 @@ async function(req,res){
     var quizId = req.body.quizId;
     var courseName = req.body.courseName;
     
-    await getQuiz(quizId, function(err, docs){
+    await getQuiz(quizId, async function(err, docs){
         //console.log(docs)
         var quizQuestions = [];
         docs.questions.forEach(item => {
@@ -418,7 +418,7 @@ async function(req,res){
          
          );
                   // GET THE QUESTIONS TO ADD TO QUIZ
-                  getQuizQuestions(quizQuestions, function(err, docs) {
+                  await getQuizQuestions(quizQuestions, async function(err, docs) {
                     var questions = [];
                     docs.forEach(item => {
                      if(item != ''){
@@ -435,7 +435,7 @@ async function(req,res){
                      }]
                      // CREATE AND SAVE THE QUIZ
                      // REDIRECT TO QUIZ PAGE
-                     generateQuiz(courseName, ssn.email, questions, results, function(err, docs) {
+                     await generateQuiz(courseName, ssn.email, questions, results, function(err, docs) {
                             //console.log(docs);
                             res.render("quiz", {
                                 quizContent : docs
