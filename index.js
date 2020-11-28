@@ -354,16 +354,18 @@ await getQuiz(quizId, async function(err, docs) {
 
      console.log(questionArray)
     
-    await updateQuiz(quizId, results, grade, function(err, docs) {
+    await updateQuiz(quizId, results, grade, async function(err, docs) {
+
+        await getQuiz(quizId, function(err, docs){
+            console.log(docs)
+            res.render("results",{
+                results: docs
+            });
+         });
 
      });
 
-     await getQuiz(quizId, function(err, docs){
-        console.log(docs)
-        res.render("results",{
-            results: docs
-        });
-     });
+
 
 
     });
