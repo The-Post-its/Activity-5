@@ -222,7 +222,66 @@ var question = "In assembly LR stands for?";
 var answers = [{answer: "Link Register", correct: 1}, {answer: "Label Routine", correct: 0}, {answer: "Last Routine", correct: 0}, {answer: "Label Register", correct: 0}]
 var answerExplanation = "The link register (R14 or LR) stores the return address during a subroutine call.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
-
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "LSL means:";
+var answers = [{answer: "logical shift left", correct: 1}, {answer: "arithmetic shift left", correct: 0}, {answer: "logical shift right", correct: 0}, {answer: "arithmetic shift right", correct: 0}]
+var answerExplanation = "(L)ogical (S)hift (L)eft.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "LSR means:";
+var answers = [{answer: "logical shift left", correct: 0}, {answer: "arithmetic shift left", correct: 0}, {answer: "logical shift right", correct: 1}, {answer: "arithmetic shift right", correct: 0}]
+var answerExplanation = "(L)ogical (S)hift (R)ight.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "The mitochondria is:";
+var answers = [{answer: "the powerhouse of the cell", correct: 1}, {answer: "wrong answer", correct: 0}, {answer: "wrong answer", correct: 0}, {answer: "not this one", correct: 0}]
+var answerExplanation = "The mitochondria is in fact the powerhouse of the cell.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "What board are we using?";
+var answers = [{answer: "STMF32-103RB", correct: 1}, {answer: "2x4", correct: 0}, {answer: "nucleo-board", correct: 0}, {answer: "STMF-104TY", correct: 0}]
+var answerExplanation = "STMF32-103RB.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "An 8 bit binary number can represent ______ values:";
+var answers = [{answer: "256", correct: 1}, {answer: "8", correct: 0}, {answer: "0", correct: 0}, {answer: "512", correct: 0}]
+var answerExplanation = "2^8=256";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "Machine code is human readable";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "Machine language is not human readable.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "Assembly language is human readable";
+var answers = [{answer: "False", correct: 0}, {answer: "True", correct: 1}]
+var answerExplanation = "It is the lowest level human readable language.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "2^n is the number of representable values for an n-bit binary number";
+var answers = [{answer: "False", correct: 0}, {answer: "True", correct: 1}]
+var answerExplanation = "This is true.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "RAM stands for 'Rudimentary Arbitrary Memory'";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "RAM stands for Random Access Memory.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 352";
+var ownerName = "Shane";
+var question = "Inputs and outputs can be treated the same on the cortex m3 board.";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "They must be treated differently in order to properly function.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 
 // ENSE 374 COURSE QUESTIONS
@@ -285,6 +344,66 @@ var ownerName = "Student";
 var question = "Refactoring is an unnecessary step in software development?";
 var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
 var answerExplanation = "Software is often improved and refactored throughout a software's development to avoid software rot.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "We use a ______ board to organize our work?";
+var answers = [{answer: "kanban", correct: 1}, {answer: "bankan", correct: 0}, {answer: "nabkan", correct: 0}, {answer: "organization", correct: 0}]
+var answerExplanation = "A kanban board is a helpful tool for organization.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Once you are done this course, you are an expert engineer.";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "This course barely breaks the surface, it takes a lifetime of learning to be an expert engineer.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "When there is something off about a piece of code it's called a:";
+var answers = [{answer: "code smell", correct: 1}, {answer: "skewed code", correct: 0}, {answer: "disfunctional code", correct: 0}, {answer: "complex code", correct: 0}]
+var answerExplanation = "Make sure your code doesn't smell!";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Visual aids help who?";
+var answers = [{answer: "All of the above and below", correct: 1}, {answer: "non-techy people", correct: 0}, {answer: "suits", correct: 0}, {answer: "developers", correct: 0}]
+var answerExplanation = "Everyone gains value from visual aids.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "SCRUM is:";
+var answers = [{answer: "a team structure", correct: 1}, {answer: "agile", correct: 0}, {answer: "hard water build-up", correct: 0}, {answer: "all of the above", correct: 0}]
+var answerExplanation = "SCRUM is a team structure that is not necessarily agile.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Agile is:";
+var answers = [{answer: "general guidelines", correct: 1}, {answer: "a rigid framework", correct: 0}, {answer: "binary, you are or are not agile", correct: 0}, {answer: "none of the above", correct: 0}]
+var answerExplanation = "Agile is a manifesto, you can be more or less agile depending on how strictly you follow the guidelines.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "SCRUM meetings are";
+var answers = [{answer: "time constrained", correct: 1}, {answer: "long and boring", correct: 0}, {answer: "as long as people still want to talk", correct: 0}, {answer: "useless", correct: 0}]
+var answerExplanation = "SCRUM events are time constrained to maximize time coding and reduce wasted time.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Agile promotes:";
+var answers = [{answer: "adaptability", correct: 0}, {answer: "open endedness for the client and the developer", correct: 0}, {answer: "more frequent code delivery", correct: 0}, {answer: "all of the above and below", correct: 1}]
+var answerExplanation = "Agile promotes all of these things.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Variables should be named: ";
+var answers = [{answer: "meaningfully", correct: 1}, {answer: "as short as possible", correct: 0}, {answer: "with a number", correct: 0}, {answer: "in all CAPS", correct: 0}]
+var answerExplanation = "Variables should first and foremost be named meaningfully so that it is easy to understand what they do.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENSE 374";
+var ownerName = "Shane";
+var question = "Classes should:";
+var answers = [{answer: "none of the above or below", correct: 1}, {answer: "be complex", correct: 0}, {answer: "contain many functions", correct: 0}, {answer: "rely heavily on other classes and be relied on", correct: 0}]
+var answerExplanation = "Simplicity and seperation of concerns is important to consider when creating classes.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 }
 //UNCOMMENT TO RUN ADD QUESTIONS DB
