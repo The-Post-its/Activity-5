@@ -75,21 +75,21 @@ app.post('/login', function(req,res, next) {
   });
 
 // REGISTER CONTROLLER
-app.post("/register", function(req, res) {
+app.post("/register", async function(req, res) {
     //console.log("REGISTER CONTROLLER");
 
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
     if(password== confirmPassword){ 
-    User.register({username: req.body.username}, req.body.password, function(err, user){
+    await User.register({username: req.body.username}, req.body.password, async function(err, user){
         if (err) {
             console.log(err);
             res.redirect("/")
         } else {
-            passport.authenticate("local")(req, res, function(){
+            passport.authenticate("local")(req, res, async function(){
                 ssn = req.session;
                 ssn.email=req.body.username;
-                res.redirect(307, "/home")
+                await res.redirect(307, "/home")
             });
         }
     });
@@ -98,11 +98,6 @@ app.post("/register", function(req, res) {
 
 // HOME
 app.post("/home", function(req, res) {
-
-
-// getEnrollment(function(enrollment){
-//     res.render("home", {classList: enrollment});
-// });
 
 Quiz.find({ ownerName: ssn.email },function (err, docs1) {
     User.findOne(

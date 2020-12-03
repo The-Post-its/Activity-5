@@ -8,7 +8,7 @@ By running node initialization.js for this file you will
 have access to the following 'Testing' database. 
 
 ****        User Model         **** 
-Use: Sign in using the following information to have access 
+Use: Register using the following information to have access 
     to a test user and their respective courses and questions
         username: Student
         password: pass
@@ -21,7 +21,7 @@ Use: 3 test courses will be available for content viewing
         ENSE 374
 
 ****        Q / A Model         **** 
-Use: 30 sample questions and answers will be available
+Use: Sample questions and answers will be available
     for each of the respective test courses. These questions
     can be viewed, studied, or dynamically added to user
     quizzes upon signing in
@@ -49,14 +49,12 @@ mongoose.connect("mongodb://localhost:27017/CollaborativeQuiz",
                  useUnifiedTopology: true});
 
 ///////////////////     IMPORT     /////////////////// 
-var User = mongoose.model('User');                
+            
 var Course = mongoose.model('Course');
 var Question = mongoose.model('Question');
 
 
 ///////////////////     INITIALIZATION     /////////////////// 
-
-// ****        User Model         **** 
 
 
 // ****        Course Model         **** 
@@ -75,7 +73,7 @@ var courseName = "ENSE 374";
 await addCourse(courseName);
 }
 //UNCOMMENT TO RUN ADD COURSES TO DB
-//addCourses();
+addCourses();
 
 // ****        Q / A Model         **** 
 function addQuestion(courseName, ownerName, question, answers, answerExplanation){
@@ -96,8 +94,6 @@ var question = "For binary numbers MSB stands for what?";
 var answers = [{answer: "Most Signed Bit", correct: 0}, {answer: "Many Signed Bits", correct: 0}, {answer: "Most Significant Bit", correct: 1}]
 var answerExplanation = "MSB means Most Significant Bit and refers to the leftmost bit with the highest weight.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
-
-// COPY LINES 92 - 98 AND FILL IN YOUR QUESTIONS
 var courseName = "ENEL 384";
 var ownerName = "Roxanne";
 var question = "A logical circuit with 3 inputs will have how many possible input conditions?";
@@ -157,6 +153,48 @@ var ownerName = "Student";
 var question = "Which of the following K-Map groupings does not result in variables cancelling?";
 var answers = [{answer: "pair", correct: 0}, {answer: "triplet", correct: 1}, {answer: "quad", correct: 0}, {answer: "octet", correct: 0}]
 var answerExplanation = "Theorem 14 states that x + x = x.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Part of a Boolean expression where one or more true or complement variables are ANDed ?";
+var answers = [{answer: "Product term", correct: 1}, {answer: "Sum term", correct: 0}]
+var answerExplanation = "For product term, the boolean expression has one or more true complement variables which are ANDed.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Priority Encoder is defined as an encoder that generates a code based on random input ?";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "Priority Encoder: An encoder that generates a code based on the highest priority input.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "An erroneous carry into the sign bit of a signed binary number is defined as ?";
+var answers = [{answer: "Carry bit", correct: 0}, {answer: "Overflow", correct: 1}, {answer: "1's complement", correct: 0}]
+var answerExplanation = " An erroneous carry into the sign bit of a signed binary number is defined as Overflow";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "BCD is an abbreviation for?";
+var answers = [{answer: "Bit carry decimal", correct: 0}, {answer: "Binary code digit", correct: 0}, {answer: "Bit code division", correct: 0}, {answer: "Binary coded decimal", correct: 1}]
+var answerExplanation = "The radix point for binary numbers is called a Binary Point";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Overflow happens if the sign bits of the operands are same ?";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "Overflow is not possible if the sign bits of theoperands are different from each other.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "Which is not a sequential circuit element ?";
+var answers = [{answer: "Catch", correct: 1}, {answer: "Flip-Flop", correct: 0}, {answer: "Latch", correct: 0}]
+var answerExplanation = "There are only two basic types, latch and flip-flop.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 384";
+var ownerName = "Student";
+var question = "The condition where the closure of a switch contact results in a mechanical bounce before the final contact is made. This condition is called?";
+var answers = [{answer: "Logic bounce", correct: 0}, {answer: "Switch latch", correct: 0}, {answer: "Logic Latch", correct: 0} , {answer: "Switch bounce", correct: 1} ]
+var answerExplanation = " An erroneous carry into the sign bit of a signed binary number is defined as Overflow";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 
@@ -222,7 +260,48 @@ var question = "In assembly LR stands for?";
 var answers = [{answer: "Link Register", correct: 1}, {answer: "Label Routine", correct: 0}, {answer: "Last Routine", correct: 0}, {answer: "Label Register", correct: 0}]
 var answerExplanation = "The link register (R14 or LR) stores the return address during a subroutine call.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
-
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "What is the hexadecimal for 1100000110100001?";
+var answers = [{answer: "B8F4", correct: 0}, {answer: "C3E2", correct: 0}, {answer: "C1A1", correct: 1}]
+var answerExplanation = "The correct answer is C1A1";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "If I am inside a subroutine and making a recursive call to this same subroutine,  it is ok to not worry about the LR as we are inside the same subroutine.  True or False";
+var answers = [{answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "The correct answer is false";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "The top four bits of the PSR register contains ?";
+var answers = [{answer: "N, Z K, X", correct: 0}, {answer: "N,Z X,V", correct: 0},{answer: "N,Z C,V", correct: 1}, {answer: "N, K, C,V", correct: 0}]
+var answerExplanation = "The top four bits of the PSR register contains N,Z,C,V";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "Unsigned comparison is performed by which of the following?";
+var answers = [{answer: "LT", correct: 0}, {answer: "LS", correct: 1},{answer: "LE", correct: 0}]
+var answerExplanation = "LT and LE are for signed and LS is for unsigned";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "Which among these is not a basic type of branch?";
+var answers = [{answer: "blm Rm", correct: 1}, {answer: "bl f", correct: 0},{answer: "blx Rm", correct: 0}, {answer: "b label", correct: 0}]
+var answerExplanation = "blm Rm is not a a type of branch.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "Postconditions are things the procedure guarantees to be true on exit, provided the preconditions were met.";
+var answers = [{answer: "False", correct: 0}, {answer: "True", correct: 1}]
+var answerExplanation = "The correct answer is true";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 352";
+var ownerName = "Student";
+var question = "Which of the following is not a mechanism in procedures for machine level programming?";
+var answers = [{answer: "Removing data", correct: 1}, {answer: "Passing control", correct: 0},{answer: "Memory management", correct: 0}]
+var answerExplanation = "There is no such mechanism procedure as removing data, instead there is passing data";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 
 
 // ENSE 374 COURSE QUESTIONS
@@ -286,6 +365,66 @@ var question = "Refactoring is an unnecessary step in software development?";
 var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
 var answerExplanation = "Software is often improved and refactored throughout a software's development to avoid software rot.";
 await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "In a communication/collaboration diagram, the order of user interaction is important to display";
+var answers = [{answer: "True", correct: 1}, {answer: "False", correct: 0}]
+var answerExplanation = "True, For example: Viewing a product on amazon is typically done after finding/searching it. Remember order is important";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "How many purpose each variable should be used for?";
+var answers = [{answer: " atleast 1 time", correct: 0}, {answer: "only twice", correct: 0}, {answer: "exactly once", correct: 1}]
+var answerExplanation = "Each variable should be used only for exactly one purpose";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "Detailed documentation (comments) nefore or after each code statement in a program is a sign of quality (clean) code";
+var answers = [{answer: "Maybe", correct: 0}, {answer: "False", correct: 1}, {answer: "True", correct: 0}]
+var answerExplanation = "False, Duplication is pointless";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "We should try to have low cohesion when creating classes";
+var answers = [{answer: "True", correct: 0}, {answer: "False", correct: 1}]
+var answerExplanation = "False, High cohesion: degree to which elements inside a function or class belong together";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "What type of coupling should we have between classes ?";
+var answers = [{answer: "No coupling", correct: 0}, {answer: "Loose coupling", correct: 1}, {answer: "Strong coupling", correct: 0}]
+var answerExplanation = "False, Our code will be less rigid.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "By following the open/close principle, our code will be rigid and as such, cleaner.";
+var answers = [{answer: "No", correct: 1}, {answer: "Yes", correct: 0}, {answer: "Maybe", correct: 0}]
+var answerExplanation = "False, Our code will be less rigid.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "Orthogonality is all about loose/low coupling?";
+var answers = [{answer: "False", correct: 0}, {answer: "True", correct: 1}]
+var answerExplanation = "True, Orthogonality is all about loose/low coupling.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "A large variable scope can make a program..?";
+var answers = [{answer: "More prone to error", correct: 1}, {answer: "Less prone to error", correct: 0}, {answer: "Does not affect", correct: 0}]
+var answerExplanation = "A large variable scope can make a program more prone to error";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "An MVC software application aims to provide an orthogonal structure between page content and its user interface";
+var answers = [{answer: "True", correct: 1}, {answer: "False", correct: 0}]
+var answerExplanation = "The statement is true.";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
+var courseName = "ENEL 374";
+var ownerName = "Student";
+var question = "Should we strive to ensure every piece of knowledge has a single, clear representation within the system we create, or is that overkill ?";
+var answers = [{answer: "No", correct: 0}, {answer: "Yes", correct: 1}, {answer: "Maybe", correct: 0}]
+var answerExplanation = "Yes, this would lead to clean code";
+await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 }
 //UNCOMMENT TO RUN ADD QUESTIONS DB
-//addQuestions();
+addQuestions();
