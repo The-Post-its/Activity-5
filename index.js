@@ -140,7 +140,7 @@ function(req,res){
 // SAVE COURSES
 app.post("/saveCourses",
 async function(req,res){
-    await getCourses(function(callback){
+    await getCourses(async function(callback){
         var updateEnrollment = [];
         for (var item of callback){
             var checkBox = req.body[item.courseName];
@@ -150,10 +150,10 @@ async function(req,res){
             }
         }
         //console.log(updateEnrollment);
-    enroll(ssn.email, updateEnrollment);
+    await enroll(ssn.email, updateEnrollment);
 });
     
-res.redirect(307, "/home")
+await res.redirect(307, "/home")
 });
 
 
@@ -202,7 +202,7 @@ async function(req,res){
  // add question to database
     await addQuestion(courseName, ownerName, question, answers, answerExplanation);
 // reload the page
-    res.redirect(307, "/courseMaterial")
+    await res.redirect(307, "/courseMaterial")
 
 });
 
@@ -395,9 +395,9 @@ async function(req,res){
     var quizId = req.body.quizId;
     
     await deleteQuiz(quizId, function(err, docs){
-        
+        res.redirect(307, "/home")
      });
-     res.redirect(307, "/home")
+     
  
 });
 
