@@ -8,7 +8,8 @@
 <li>mongod</li>
 <li>node index.js</li>
 <li>open browser local port 3000</li>
-<li>view database updates with mongo > show dbs</li>
+<li>run init.js for dummy database</li>
+<li>enjoy</li> 
 </ol>
 
 ## Presentation/Report
