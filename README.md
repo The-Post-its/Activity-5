@@ -2,14 +2,14 @@
 
 ## Quick Guide
 <ol>
-<li>download all files (except diagrams, documents, report, etc.)</li>
-<li>open folder in VS code</li>
-<li>npm install</li>
-<li>mongod</li>
-<li>node index.js</li>
-<li>open browser local port 3000</li>
-<li>run initialization.js for dummy database</li>
-<li>enjoy</li> 
+<li>Download all files (except diagrams, documents, report, etc.)</li>
+<li>Open folder in VS code</li>
+<li>npm install *Installs all modules*</li>
+<li>mongod *Runs mongo database*</li>
+<li>node initialization.js *Initialize test database*</li>
+<li>node index.js *Runs Collaborative Quiz App*</li>
+<li>Open browser local port 3000</li>
+<li>Enjoy!</li> 
 </ol>
 
 ## Presentation/Report
