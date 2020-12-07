@@ -8,7 +8,7 @@
 <li>mongod</li>
 <li>node index.js</li>
 <li>open browser local port 3000</li>
-<li>run init.js for dummy database</li>
+<li>run initialization.js for dummy database</li>
 <li>enjoy</li> 
 </ol>
 
