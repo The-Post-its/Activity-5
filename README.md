@@ -20,7 +20,7 @@
 * [Class Diagram](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DIAGRAMS/Class%20Diagram%20Final%20Version.pdf)
 * [Lo-Fi GUI Sketches](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DIAGRAMS/GUI%20Sketches/GUI%20Sketches.pdf)
 * [UML-ish Diagrams](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DIAGRAMS/UML%20Diagrams/UML%20Diagrams.pdf)
-* [MVC Architecture Diagram] (https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DIAGRAMS/MVC%20Architecture%20Diagram%20Final%20Version.pdf)
+* [MVC Architecture Diagram](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DIAGRAMS/MVC%20Architecture%20Diagram%20Final%20Version.pdf)
 
 ## Finalized Documents
 * [Stakeholder Analysis and Management Plan](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DOCS/Stakeholder%20Analysis%20and%20Management%20Plan%20Final%20Version.pdf)
