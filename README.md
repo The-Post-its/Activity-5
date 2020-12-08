@@ -27,6 +27,7 @@
 * [Project Charter](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DOCS/Project%20Charter%20Final%20Version.pdf)
 * [Roles and Responsibilities](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DOCS/Project%20Roles%20and%20Responsibilities%20Final%20Version.pdf)
 * [Project Scope Statement](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DOCS/Project%20Scope%20Statement%20Final%20Version.pdf)
+* [Business Case](https://github.com/The-Post-its/Activity-5/blob/master/Documentation/FINAL%20DOCS/Business%20Case%20Final%20Version.pdf)
 
 ## Vlog 
 * [Vlog Youtube Link](https://www.youtube.com/watch?v=UvcLg45mRGQ&feature=youtu.be)
